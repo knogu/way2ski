@@ -1,6 +1,6 @@
 import { time } from "console";
-import { LegProps } from "./Leg"
-import { TripCandidateProps } from "./TripCandidate";
+import { LegProps } from "../components/Leg"
+import { TripCandidateProps } from "../components/TripCandidate";
 
 export type Line = {
     departureStation: string,
@@ -79,7 +79,7 @@ function getLineList(): Line[] {
     return [kagura2yuzawa(), yuzawa2tokyo()];
 }
 
-function LineList2TripCandidateListProp(lineList: Line[]): TripCandidateProps[] {
+function LineList2TripCandidateListProp(lineList: Line[], departAfter: Date, arriveBefore: Date): TripCandidateProps[] {
     const lineCnt: number = lineList.length;
     let lineIdx2CurLegIdx: number[] = new Array(lineCnt).fill(0);
     let tripCandidates: TripCandidateProps[] = [];
@@ -109,6 +109,7 @@ function LineList2TripCandidateListProp(lineList: Line[]): TripCandidateProps[] 
             }
         }
         if (isOk) {
+
             const legsInCurTrip: LegProps[] = [lineList[0].legs[legIdxInFirst]];
             lineIdx2CurLegIdx.forEach((legIdx, lineIdx) => {
                 if (legIdx > 0)  {
@@ -116,13 +117,16 @@ function LineList2TripCandidateListProp(lineList: Line[]): TripCandidateProps[] 
                 }
             })
             const curTrip: TripCandidateProps = {legProps: legsInCurTrip};
-            tripCandidates.push(curTrip);
+            const legLength = lineIdx2CurLegIdx.length;
+            if (departAfter <= curTrip.legProps.at(0)!.departureTime && curTrip.legProps.at(legLength-1)!.arrivalTime <= arriveBefore) {
+                tripCandidates.push(curTrip);
+            }
         }
     }    
     return tripCandidates;
 }
 
 
-export function genTripCandidateListProps(): TripCandidateProps[] {
-    return LineList2TripCandidateListProp(getLineList());
+export function genTripCandidateListProps(departAfter: Date, arriveBefore: Date): TripCandidateProps[] {
+    return LineList2TripCandidateListProp(getLineList(), departAfter, arriveBefore);
 }
