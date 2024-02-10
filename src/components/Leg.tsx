@@ -18,8 +18,9 @@ export const Leg = (legProps: LegProps) => {
     return (
         <>
             <p className='leave'>{displayTime(legProps.departureTime) + " "}<span className='ms-2'>{legProps.departureStation}</span></p>
-            <div className='v-line'></div>
+            <p>↓{legProps.lineName}</p>
             <p className='reach'>{displayTime(legProps.arrivalTime) + " "}<span className='ms-2'>{legProps.arrivalStation}</span></p>
+            <p>---</p>
         </>
     )
 }
