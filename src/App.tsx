@@ -1,16 +1,22 @@
-import React from 'react';
 import './App.css';
 import { TripCandidateList } from './components/TripCandidateList';
-import { genTripCandidateListProps } from './types/Line';
-import { useTripCandidates } from './hooks/tripCandidates';
-import { QueryCmp, QueryProps } from './components/Query';
+import { useTripCandidates, useTripCandidatesRes } from './hooks/tripCandidates';
+import { QueryCmp } from './components/Query';
 
-function App() {
-  const {query, setQuery, tripCandidateList, setTripCandidateList} = useTripCandidates();
+const OneWay = (useTripCandidateRes: useTripCandidatesRes) => {
   return (
     <>
-      <QueryCmp query={query} setQuery={setQuery}/>
-      <TripCandidateList tripCandidateProps={tripCandidateList} />
+      <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
+      <TripCandidateList tripCandidateProps={useTripCandidateRes.tripCandidateList} />
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      {OneWay(useTripCandidates(true))}
+      {OneWay(useTripCandidates(false))};
     </>
   );
 }

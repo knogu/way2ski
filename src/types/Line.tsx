@@ -37,6 +37,31 @@ function kagura2yuzawa(): Line {
     }
 }
 
+function yuzawa2kagura(): Line {
+    const times = [
+        [7, 40, 8, 0],
+        [8, 20, 8, 38],
+        [8, 40, 8, 58],
+        [9, 40, 9, 58],
+        [11, 0, 11, 18],
+    ]
+    const legs: LegProps[] = [];
+    times.forEach(time => {
+        legs.push({
+            departureTime: new Date(2024, 1, 1, time.at(0), time.at(1), 0),
+            departureStation: "越後湯沢",
+            arrivalTime: new Date(2024, 1, 1, time.at(2), time.at(3), 0),
+            arrivalStation: "かぐらスキー場",
+            lineName: "南越後観光バス",
+        })
+    });
+    return {
+        departureStation: "越後湯沢",
+        arrivalStation: "かぐらスキー場",
+        legs: legs, 
+    }
+}
+
 function yuzawa2tokyo(): Line {
     const times = [
         [12, 11, 13, 28],
@@ -75,8 +100,45 @@ function yuzawa2tokyo(): Line {
     }
 }
 
-function getLineList(): Line[] {
-    return [kagura2yuzawa(), yuzawa2tokyo()];
+function tokyo2yuzawa(): Line {
+    const times = [
+        [6, 8, 7, 22],
+        [6, 44, 7, 50],
+        [6, 36, 8, 2],
+        [7, 4, 8, 10],
+        [7, 36, 8, 58],
+        [7, 48, 9, 5],
+        [8, 4, 9, 33],
+        [8, 24, 9, 39],
+        [8, 32, 9, 46],
+        [8, 52, 10, 20],
+        [9, 28, 10, 47],
+        [9, 52, 11, 11],
+        [10, 16, 11, 31],
+    ]
+    const legs: LegProps[] = [];
+    times.forEach(time => {
+        legs.push({
+            departureTime: new Date(2024, 1, 1, time.at(0), time.at(1), 0),
+            departureStation: "東京",
+            arrivalTime: new Date(2024, 1, 1, time.at(2), time.at(3), 0),
+            arrivalStation: "越後湯沢",
+            lineName: "上越新幹線",
+        })
+    });
+    return {
+        departureStation: "東京",
+        arrivalStation: "越後湯沢",
+        legs: legs,
+    }
+}
+
+function getLineList(isToSki: boolean): Line[] {
+    if (isToSki) {
+        return [tokyo2yuzawa(), yuzawa2kagura()];
+    } else {
+        return [kagura2yuzawa(), yuzawa2tokyo()];
+    }
 }
 
 function LineList2TripCandidateListProp(lineList: Line[], query: Query): TripCandidateProps[] {
@@ -125,7 +187,7 @@ function LineList2TripCandidateListProp(lineList: Line[], query: Query): TripCan
             })
             const curTrip: TripCandidateProps = {legProps: legsInCurTrip};
             const legLength = lineIdx2CurLegIdx.length;
-            if (departAfter <= curTrip.legProps.at(0)!.departureTime && curTrip.legProps.at(legLength-1)!.arrivalTime <= arriveBefore) {
+            if (curTrip.legProps.length === legLength && departAfter <= curTrip.legProps.at(0)!.departureTime && curTrip.legProps.at(legLength-1)!.arrivalTime <= arriveBefore) {
                 tripCandidates.push(curTrip);
             }
         }
@@ -134,6 +196,6 @@ function LineList2TripCandidateListProp(lineList: Line[], query: Query): TripCan
 }
 
 
-export function genTripCandidateListProps(query: Query): TripCandidateProps[] {
-    return LineList2TripCandidateListProp(getLineList(), query);
+export function genTripCandidateListProps(isToSki: boolean, query: Query): TripCandidateProps[] {
+    return LineList2TripCandidateListProp(getLineList(isToSki), query);
 }
