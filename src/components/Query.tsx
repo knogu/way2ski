@@ -3,10 +3,12 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react"
 export type Query = {
     departAfter: Date,
     arriveBefore: Date,
+    transitMinutes: number,
+    isTransitMinutesValid: boolean,
 }
 
 export type QueryProps = {
-    query: Query, 
+    query: Query,
     setQuery: Dispatch<SetStateAction<Query>>
 }
 
@@ -17,7 +19,10 @@ const date2inputVal = (date: Date) => {
 }
 
 export const QueryCmp = (props: QueryProps) => {
-    let curQuery: Query = {departAfter: props.query.departAfter, arriveBefore: props.query.arriveBefore};
+    let curQuery: Query = {departAfter: props.query.departAfter,
+                           arriveBefore: props.query.arriveBefore,
+                           transitMinutes: props.query.transitMinutes,
+                           isTransitMinutesValid: props.query.isTransitMinutesValid};
     const handleDepartChange = (event: ChangeEvent<HTMLInputElement>) => {
         const [h, m] = event.target.value.split(':').map(Number);
         curQuery.departAfter = new Date(2024, 1, 1, h, m, 0);
@@ -30,10 +35,33 @@ export const QueryCmp = (props: QueryProps) => {
         props.setQuery(curQuery);
     };
 
+    const handleTransitMinutesChange = (event: ChangeEvent<HTMLInputElement>) => {
+        curQuery.transitMinutes = parseInt(event.target.value);
+        if (curQuery.transitMinutes) {
+            curQuery.isTransitMinutesValid = true;
+        } else {
+            curQuery.transitMinutes = 0;
+            curQuery.isTransitMinutesValid = false;
+        }
+        props.setQuery(curQuery);
+    };
+
+    const displayedTransitMinutes = (curQuery: Query) => {
+        if (curQuery.isTransitMinutesValid) {
+            return curQuery.transitMinutes.toString();
+        } else {
+            return "";
+        }
+    } 
+
     return (
         <>
             <input id="departAfter" type="time" onChange={handleDepartChange} value={date2inputVal(curQuery.departAfter)}></input>
             <input id="arriveBefore" type="time" onChange={handleArriveChange} value={date2inputVal(curQuery.arriveBefore)}></input>
+            <p>
+            乗り換え時間(分): 
+            <input id="transitMinute" type="text" onChange={handleTransitMinutesChange} value={displayedTransitMinutes(curQuery)}></input>
+            </p>
         </>
     )
 }

@@ -1,6 +1,6 @@
-import { time } from "console";
 import { LegProps } from "../components/Leg"
 import { TripCandidateProps } from "../components/TripCandidate";
+import { Query } from "../components/Query";
 
 export type Line = {
     departureStation: string,
@@ -79,30 +79,37 @@ function getLineList(): Line[] {
     return [kagura2yuzawa(), yuzawa2tokyo()];
 }
 
-function LineList2TripCandidateListProp(lineList: Line[], departAfter: Date, arriveBefore: Date): TripCandidateProps[] {
+function LineList2TripCandidateListProp(lineList: Line[], query: Query): TripCandidateProps[] {
     const lineCnt: number = lineList.length;
+    const departAfter = query.departAfter;
+    const arriveBefore = query.arriveBefore;
     let lineIdx2CurLegIdx: number[] = new Array(lineCnt).fill(0);
     let tripCandidates: TripCandidateProps[] = [];
     for (let legIdxInFirst = 0; legIdxInFirst < lineList.at(0)!.legs.length; legIdxInFirst++) {
         let isOk = true;
         for (let lineIdx = 1; lineIdx < lineList.length; lineIdx++) {
             const curLine = lineList[lineIdx];
-            let lastArrivalTime;
-            if (lineIdx == 1) {
+            let lastArrivalTime: Date;
+            if (lineIdx === 1) {
                 lastArrivalTime = lineList[0].legs[legIdxInFirst].arrivalTime;
             } else {
                 lastArrivalTime = lineList[lineIdx - 1].legs[lineIdx2CurLegIdx[lineIdx-1]].arrivalTime;
             }
+            const lastArrivalTimeCopy = new Date(lastArrivalTime.getTime());
+            lastArrivalTimeCopy.setMinutes(lastArrivalTime.getMinutes() + query.transitMinutes);
+
             while (true) {
-                const departureTime = curLine.legs[lineIdx2CurLegIdx[lineIdx]].departureTime;
-                if (lastArrivalTime < departureTime) {
-                    break;
-                }
                 if (lineIdx2CurLegIdx[lineIdx] === lineList[lineIdx].legs.length) {
                     isOk = false;
                     break;
                 }
+
+                const departureTime = curLine.legs[lineIdx2CurLegIdx[lineIdx]].departureTime;
+                if (lastArrivalTimeCopy <= departureTime) {
+                    break;
+                }
                 lineIdx2CurLegIdx[lineIdx] += 1;
+                
             }
             if (!isOk) {
                 break;
@@ -127,6 +134,6 @@ function LineList2TripCandidateListProp(lineList: Line[], departAfter: Date, arr
 }
 
 
-export function genTripCandidateListProps(departAfter: Date, arriveBefore: Date): TripCandidateProps[] {
-    return LineList2TripCandidateListProp(getLineList(), departAfter, arriveBefore);
+export function genTripCandidateListProps(query: Query): TripCandidateProps[] {
+    return LineList2TripCandidateListProp(getLineList(), query);
 }
