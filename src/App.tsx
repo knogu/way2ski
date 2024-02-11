@@ -8,8 +8,13 @@ import { PlaceDateQuery } from './components/PlaceDateQuery';
 const OneWay = (useTripCandidateRes: useTripCandidatesRes) => {
   return (
     <>
-      <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
-      <TripCandidateList tripCandidateProps={useTripCandidateRes.tripCandidateList} />
+      <div className="detailed-query">
+        <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
+      </div>
+
+      <div className='results'>
+        <TripCandidateList tripCandidateProps={useTripCandidateRes.tripCandidateList} />
+      </div>
     </>
   )
 }
@@ -43,12 +48,17 @@ function App() {
 
   return (
     <>
-      <p>出発駅<input type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange}></input></p>
-      <p>スキー場<input type="text" value={placeDateQuery.skiResort} onChange={handleSkiResortChange}></input></p>
-      <p>
-        行き<input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-      </p>
+      <section className="main-date-place-query">
+        <p>出発駅<input type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange}></input></p>
+        <p>スキー場<input type="text" value={placeDateQuery.skiResort} onChange={handleSkiResortChange}></input></p>
+      </section>
+      
+      <section className="main-results-and-detailed-query">
+        <p>
+          行き<input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+        </p>
       {OneWay(useTripCandidates(placeDateQuery, isChecked))};
+      </section>
     </>
   );
 }
