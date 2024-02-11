@@ -33,6 +33,13 @@ export const useTripCandidates = (isToSki: boolean) => {
     const [tripCandidateList, setTripCandidateList] = useState(initialCands);
 
     useEffect(() => {
+        const query = initialQuery;
+        setQuery(query);
+        const cands = genTripCandidateListProps(isToSki, query);
+        setTripCandidateList(cands);
+    }, [isToSki])
+
+    useEffect(() => {
         const cands = genTripCandidateListProps(isToSki, query);
         setTripCandidateList(cands);
     }, [query])
