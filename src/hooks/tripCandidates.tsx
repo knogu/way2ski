@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { QueryProps, QueryCmp, Query } from "../components/Query"
 import { genTripCandidateListProps } from "../types/Line"
 import { TripCandidateProps } from "../components/TripCandidate"
+import { PlaceDateQuery } from "../components/PlaceDateQuery"
 
 export type useTripCandidatesRes = {
     query: Query,
@@ -10,7 +11,7 @@ export type useTripCandidatesRes = {
     setTripCandidateList: Dispatch<SetStateAction<TripCandidateProps[]>>,
 }
 
-export const useTripCandidates = (isToSki: boolean) => {
+export const useTripCandidates = (placeDateQuery: PlaceDateQuery, isToSki: boolean) => {
     let initialDepartAfter;
     let initialArriveBefore;
     if (isToSki) {
@@ -29,20 +30,20 @@ export const useTripCandidates = (isToSki: boolean) => {
     
     const [query, setQuery] = useState(initialQuery);
 
-    const initialCands = genTripCandidateListProps(isToSki, initialQuery)
+    const initialCands = genTripCandidateListProps(placeDateQuery, isToSki, initialQuery)
     const [tripCandidateList, setTripCandidateList] = useState(initialCands);
 
     useEffect(() => {
         const query = initialQuery;
         setQuery(query);
-        const cands = genTripCandidateListProps(isToSki, query);
+        const cands = genTripCandidateListProps(placeDateQuery, isToSki, query);
         setTripCandidateList(cands);
     }, [isToSki])
 
     useEffect(() => {
-        const cands = genTripCandidateListProps(isToSki, query);
+        const cands = genTripCandidateListProps(placeDateQuery ,isToSki, query);
         setTripCandidateList(cands);
-    }, [query])
+    }, [query, placeDateQuery]) // placeDateQuery指定せずに再計算、再描画できないか？
 
     const ret: useTripCandidatesRes = { 
         query: query,

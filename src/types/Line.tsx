@@ -1,6 +1,7 @@
 import { LegProps } from "../components/Leg"
 import { TripCandidateProps } from "../components/TripCandidate";
 import { Query } from "../components/Query";
+import { PlaceDateQuery } from "../components/PlaceDateQuery";
 
 export type Line = {
     departureStation: string,
@@ -133,7 +134,7 @@ function tokyo2yuzawa(): Line {
     }
 }
 
-function getLineList(isToSki: boolean): Line[] {
+function getLineList(placeDateQuery: PlaceDateQuery ,isToSki: boolean): Line[] {
     if (isToSki) {
         return [tokyo2yuzawa(), yuzawa2kagura()];
     } else {
@@ -196,6 +197,6 @@ function LineList2TripCandidateListProp(lineList: Line[], query: Query): TripCan
 }
 
 
-export function genTripCandidateListProps(isToSki: boolean, query: Query): TripCandidateProps[] {
-    return LineList2TripCandidateListProp(getLineList(isToSki), query);
+export function genTripCandidateListProps(placeDateQuery: PlaceDateQuery, isToSki: boolean, query: Query): TripCandidateProps[] {
+    return LineList2TripCandidateListProp(getLineList(placeDateQuery, isToSki), query);
 }
