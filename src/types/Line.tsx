@@ -181,7 +181,7 @@ function LineList2TripCandidateListProp(lineList: Line[], query: Query): TripCan
 
             const legsInCurTrip: LegProps[] = [lineList[0].legs[legIdxInFirst]];
             lineIdx2CurLegIdx.forEach((legIdx, lineIdx) => {
-                if (legIdx > 0)  {
+                if (lineIdx > 0)  {
                     legsInCurTrip.push(lineList[lineIdx].legs[legIdx]);
                 }
             })

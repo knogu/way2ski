@@ -16,7 +16,6 @@ const OneWay = (useTripCandidateRes: useTripCandidatesRes) => {
 function App() {
   const [isChecked, setIsChecked] = useState<boolean>(true);
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.checked);
     setIsChecked(event.target.checked);
   };
 
