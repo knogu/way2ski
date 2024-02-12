@@ -5,13 +5,14 @@ import { QueryCmp } from './components/Query';
 import { ChangeEvent, useState } from 'react';
 import { PlaceDateQuery } from './components/PlaceDateQuery';
 
-const OneWay = (isChecked: boolean, handleCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>) => void, useTripCandidateRes: useTripCandidatesRes) => {
+const OneWay = (isChecked: boolean, handleClickToSki: ()=>void, handleClickHome: ()=>void, useTripCandidateRes: useTripCandidatesRes) => {
   return (
     <>
       <div className="detailed-query">
           <div className='query-group'>
-            <p>
-              <label className='query-key' htmlFor='is-to-ski'>行き</label><input id="is-to-ski" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+            <p className='query-key'>
+              <button className={isChecked ? "active" : "inactive"} onClick={handleClickToSki}>行き</button>
+              <button className={isChecked ? "inactive" : "active"} onClick={handleClickHome}>帰り</button>
             </p>
           </div>
           <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
@@ -25,9 +26,14 @@ const OneWay = (isChecked: boolean, handleCheckboxChange: (event: React.ChangeEv
 }
 
 function App() {
-  const [isChecked, setIsChecked] = useState<boolean>(true);
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(event.target.checked);
+  const [isToSki, setIsToSki] = useState<boolean>(true);
+
+  const handleClickToSki = () => {
+    setIsToSki(true);
+  };
+
+  const handleClickHome = () => {
+    setIsToSki(false);
   };
 
   const initialPlaceDateQuery: PlaceDateQuery = {
@@ -65,7 +71,7 @@ function App() {
       <section className="main-results-and-detailed-query">
       <div className='container'>
         
-      {OneWay(isChecked, handleCheckboxChange, useTripCandidates(placeDateQuery, isChecked))}
+      {OneWay(isToSki, handleClickToSki, handleClickHome, useTripCandidates(placeDateQuery, isToSki))}
       </div>
       </section>
     </>

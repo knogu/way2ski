@@ -35,7 +35,7 @@
 
 .query-key {
   font-size: 15px;
-  margin: 10px;
+  margin: 10px 10px 10px 0px;
 }
 
 .leg {
@@ -65,4 +65,17 @@ input {
   background-color: #efefef;
   padding: 10px 4% 10px 4%;
   border-bottom: 3px solid black;
+}
+
+.detailed-query button {
+  border-radius: 0;
+  border-width: 1px;
+  border-color: #6C757D;
+  height: 35px;
+  width: 60px;
+}
+
+.active {
+  background-color: #6C757D;
+  color: white;
 }
