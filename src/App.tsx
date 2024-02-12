@@ -59,14 +59,14 @@ function App() {
 
   return (
     <>
-      <section className="main-date-place-query">
+      {/* <section className="main-date-place-query">
         <div className='container'>
           <div className='query-group'>
             <p><label htmlFor="hometown-station" className="query-key">出発駅</label><input id="hometown-station" type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange}></input></p>
             <p><label htmlFor="ski-resort" className="query-key">スキー場</label><input id="ski-resort" type="text" value={placeDateQuery.skiResort} onChange={handleSkiResortChange}></input></p>
           </div>
         </div>
-      </section>
+      </section> */}
       
       <section className="main-results-and-detailed-query">
       <div className='container'>
