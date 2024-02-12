@@ -64,7 +64,7 @@ export const QueryCmp = (props: QueryProps) => {
             
             <div className="transit-query">
                 <div className='query-group'>
-                    <p><label htmlFor="transit-minute" className="query-key">乗り換え時間（越後湯沢）</label><input id="transit-minute" type="text" onChange={handleTransitMinutesChange} value={displayedTransitMinutes(curQuery)}></input>分以上</p>
+                    <p><label htmlFor="transit-minute" className="query-key">乗り換え時間（越後湯沢）</label><input id="transit-minute" type="number" onChange={handleTransitMinutesChange} value={displayedTransitMinutes(curQuery)}></input>分以上</p>
                 </div>
             </div>
         </>
