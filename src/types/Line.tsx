@@ -143,6 +143,9 @@ function getLineList(placeDateQuery: PlaceDateQuery ,isToSki: boolean): Line[] {
 }
 
 function LineList2TripCandidateListProp(lineList: Line[], query: Query): TripCandidateProps[] {
+    if (query.isTransitMinutesEmpty) {
+        return [];
+    }
     const lineCnt: number = lineList.length;
     const departAfter = query.departAfter;
     const arriveBefore = query.arriveBefore;

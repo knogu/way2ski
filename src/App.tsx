@@ -65,7 +65,7 @@ function App() {
       <section className="main-results-and-detailed-query">
       <div className='container'>
         
-      {OneWay(isChecked, handleCheckboxChange, useTripCandidates(placeDateQuery, isChecked))};
+      {OneWay(isChecked, handleCheckboxChange, useTripCandidates(placeDateQuery, isChecked))}
       </div>
       </section>
     </>

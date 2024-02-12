@@ -4,7 +4,7 @@ export type Query = {
     departAfter: Date,
     arriveBefore: Date,
     transitMinutes: number,
-    isTransitMinutesValid: boolean,
+    isTransitMinutesEmpty: boolean,
 }
 
 export type QueryProps = {
@@ -22,7 +22,7 @@ export const QueryCmp = (props: QueryProps) => {
     let curQuery: Query = {departAfter: props.query.departAfter,
                            arriveBefore: props.query.arriveBefore,
                            transitMinutes: props.query.transitMinutes,
-                           isTransitMinutesValid: props.query.isTransitMinutesValid};
+                           isTransitMinutesEmpty: props.query.isTransitMinutesEmpty};
     const handleDepartChange = (event: ChangeEvent<HTMLInputElement>) => {
         const [h, m] = event.target.value.split(':').map(Number);
         curQuery.departAfter = new Date(2024, 1, 1, h, m, 0);
@@ -36,22 +36,23 @@ export const QueryCmp = (props: QueryProps) => {
     };
 
     const handleTransitMinutesChange = (event: ChangeEvent<HTMLInputElement>) => {
-        curQuery.transitMinutes = parseInt(event.target.value);
-        if (curQuery.transitMinutes) {
-            curQuery.isTransitMinutesValid = true;
+        if (event.target.value === "") {
+            curQuery.isTransitMinutesEmpty = true;
         } else {
-            curQuery.transitMinutes = 0;
-            curQuery.isTransitMinutesValid = false;
+            const newTransitMinutes = parseInt(event.target.value);
+            if (newTransitMinutes) {
+                curQuery.transitMinutes = newTransitMinutes;
+                curQuery.isTransitMinutesEmpty = false;
+            }
         }
         props.setQuery(curQuery);
     };
 
     const displayedTransitMinutes = (curQuery: Query) => {
-        if (curQuery.isTransitMinutesValid) {
-            return curQuery.transitMinutes.toString();
-        } else {
+        if (curQuery.isTransitMinutesEmpty) {
             return "";
         }
+        return curQuery.transitMinutes.toString();
     } 
 
     return (

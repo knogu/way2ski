@@ -25,7 +25,7 @@ export const useTripCandidates = (placeDateQuery: PlaceDateQuery, isToSki: boole
     const initialQuery: Query = {
         departAfter: initialDepartAfter, arriveBefore: initialArriveBefore,
         transitMinutes: 5,
-        isTransitMinutesValid: true,
+        isTransitMinutesEmpty: false,
     };
     
     const [query, setQuery] = useState(initialQuery);
