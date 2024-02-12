@@ -16,11 +16,10 @@ function displayTime(date: Date) : string {
 
 export const Leg = (legProps: LegProps) => {
     return (
-        <>
+        <div className="leg">
             <p className='leave'>{displayTime(legProps.departureTime) + " "}<span className='ms-2'>{legProps.departureStation}</span></p>
             <p>↓{legProps.lineName}</p>
             <p className='reach'>{displayTime(legProps.arrivalTime) + " "}<span className='ms-2'>{legProps.arrivalStation}</span></p>
-            <p>---</p>
-        </>
+        </div>
     )
 }

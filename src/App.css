@@ -30,6 +30,16 @@
   margin: 10px;
 }
 
+.leg {
+  border-bottom: 1px solid #6C757D;
+  padding: 5px 10px;
+}
+
+.trip-candidate {
+  border-top: 3px solid black; 
+  border-bottom: 3px solid black;
+}
+
 p {
   margin: 10px;
 }
@@ -46,4 +56,5 @@ input {
 .detailed-query {
   background-color: #efefef;
   padding: 10px 4% 10px 4%;
+  border-bottom: 3px solid black;
 }
