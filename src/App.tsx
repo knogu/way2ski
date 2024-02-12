@@ -5,15 +5,20 @@ import { QueryCmp } from './components/Query';
 import { ChangeEvent, useState } from 'react';
 import { PlaceDateQuery } from './components/PlaceDateQuery';
 
-const OneWay = (useTripCandidateRes: useTripCandidatesRes) => {
+const OneWay = (isChecked: boolean, handleCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>) => void, useTripCandidateRes: useTripCandidatesRes) => {
   return (
     <>
       <div className="detailed-query">
-        <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
+          <div className='query-group'>
+            <p>
+              <label className='query-key' htmlFor='is-to-ski'>行き</label><input id="is-to-ski" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+            </p>
+          </div>
+          <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
       </div>
 
       <div className='results'>
-        <TripCandidateList tripCandidateProps={useTripCandidateRes.tripCandidateList} />
+          <TripCandidateList tripCandidateProps={useTripCandidateRes.tripCandidateList} />
       </div>
     </>
   )
@@ -49,15 +54,19 @@ function App() {
   return (
     <>
       <section className="main-date-place-query">
-        <p>出発駅<input type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange}></input></p>
-        <p>スキー場<input type="text" value={placeDateQuery.skiResort} onChange={handleSkiResortChange}></input></p>
+        <div className='container'>
+          <div className='query-group'>
+            <p><label htmlFor="hometown-station" className="query-key">出発駅</label><input id="hometown-station" type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange}></input></p>
+            <p><label htmlFor="ski-resort" className="query-key">スキー場</label><input id="ski-resort" type="text" value={placeDateQuery.skiResort} onChange={handleSkiResortChange}></input></p>
+          </div>
+        </div>
       </section>
       
       <section className="main-results-and-detailed-query">
-        <p>
-          行き<input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-        </p>
-      {OneWay(useTripCandidates(placeDateQuery, isChecked))};
+      <div className='container'>
+        
+      {OneWay(isChecked, handleCheckboxChange, useTripCandidates(placeDateQuery, isChecked))};
+      </div>
       </section>
     </>
   );
