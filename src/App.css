@@ -79,3 +79,26 @@ input {
   background-color: #6C757D;
   color: white;
 }
+
+.summary button {
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  line-height: 1;
+  width: 1em;
+  height: 1em;
+  border: 0.1em solid black;
+  border-left: 0;
+  border-bottom: 0;
+  box-sizing: border-box;
+  background-color: white;
+  margin-left: 5px;
+}
+
+.summary .inactive {
+  transform: translateY(-25%) rotate(135deg);
+}
+
+.summary .active {
+  transform: translateY(25%) rotate(-45deg);
+}

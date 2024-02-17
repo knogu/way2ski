@@ -17,7 +17,7 @@ export const TripCandidate = (props: TripCandidateProps) => {
     return (
         <div className="trip-candidate">
             <div className="summary">
-                <p>{totalDepartureTime}発 → {totalArrivalTime}着 <span><button onClick={handleDetailClick}>detail</button></span></p>
+                <p>{totalDepartureTime}発 → {totalArrivalTime}着 <button onClick={handleDetailClick} className={isDetailDisplayed ? "active" : "inactive"}></button></p>
             </div>
 
             {props.legProps.map((legProp, i) => {
