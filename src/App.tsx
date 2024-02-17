@@ -67,9 +67,12 @@ function App() {
     <>
       <section className="main-date-place-query">
         <div className='container'>
-          <div className='query-group block'>
-            <p><label htmlFor="hometown-station" className="query-key">出発駅</label><input id="hometown-station" type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange}></input></p>
-          </div>
+            <div className='place-query'>
+              <input id="hometown-station" type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange} placeholder='出発駅'></input>
+              {/* todo: selectに変更 */}
+              <input id="ski-resort" type="text" value={placeDateQuery.skiResort} onChange={handleHometownStationChange} placeholder='スキー場'></input>
+            </div>
+            {/* todo: 日にち追加 */}
         </div>
       </section>
       

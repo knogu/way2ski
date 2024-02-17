@@ -3,17 +3,32 @@
   
 }
 
-.main-date-place-query .query-key {
-  font-size: 15px; 
-  padding-top: 2px;
+.main-date-place-query {
+  background-color: #f8f9fa;
+  padding: 20px 20px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ced4da;
 }
 
 .main-date-place-query input {
-  float: right;
-  margin-right: 70px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  margin-right: 5px;
   padding: 2px 6px;
-  height: 20px;
-  border: 1px solid #C0CDDC;
+  height: 22px;
+  border-radius: 5px;
+}
+
+/* .date-and-place {
+  height: 50px;
+  background-color: #f8f9fa;
+} */
+
+
+.place-query {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
 }
 
 .query-group {
