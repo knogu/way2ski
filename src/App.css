@@ -3,18 +3,6 @@
   
 }
 
-/* body {
-  padding: 0 4% 0 4%;
-  margin: 0 auto;
-} */
-
-.main-date-place-query .container {
-  background-color: #6C757D;
-  color: white;
-  padding-bottom: 5px;
-  padding: 20px 4% 10px 4%;
-}
-
 .main-date-place-query .query-key {
   font-size: 15px; 
   padding-top: 2px;
@@ -49,6 +37,12 @@
   border-radius: 8px;
 }
 
+.block {
+  border: 1px solid #6C757D;
+  margin: 15px;
+  border-radius: 8px;
+}
+
 p {
   margin: 10px;
 }
@@ -63,9 +57,7 @@ input {
 }
 
 .detailed-query {
-  background-color: #efefef;
   padding: 10px 4% 10px 4%;
-  border-bottom: 3px solid black;
 }
 
 .detailed-query button {

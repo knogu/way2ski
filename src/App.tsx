@@ -8,7 +8,7 @@ import { PlaceDateQuery } from './components/PlaceDateQuery';
 const OneWay = (isChecked: boolean, handleClickToSki: ()=>void, handleClickHome: ()=>void, useTripCandidateRes: useTripCandidatesRes) => {
   return (
     <>
-      <div className="detailed-query">
+      <div className="detailed-query block">
           <div className='query-group'>
             <p className='query-key'>
               <button className={isChecked ? "active" : "inactive"} onClick={handleClickToSki}>行き</button>
@@ -61,7 +61,7 @@ function App() {
     <>
       <section className="main-date-place-query">
         <div className='container'>
-          <div className='query-group'>
+          <div className='query-group block'>
             <p><label htmlFor="hometown-station" className="query-key">出発駅</label><input id="hometown-station" type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange}></input></p>
             <p><label htmlFor="ski-resort" className="query-key">スキー場</label><input id="ski-resort" type="text" value={placeDateQuery.skiResort} onChange={handleSkiResortChange}></input></p>
           </div>
