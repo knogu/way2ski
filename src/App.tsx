@@ -7,21 +7,27 @@ import { PlaceDateQuery } from './components/PlaceDateQuery';
 
 const OneWay = (isChecked: boolean, handleClickToSki: ()=>void, handleClickHome: ()=>void, useTripCandidateRes: useTripCandidatesRes) => {
   return (
-    <>
-      <div className="detailed-query block">
-          <div className='query-group'>
-            <p className='query-key'>
-              <button className={isChecked ? "active" : "inactive"} onClick={handleClickToSki}>行き</button>
-              <button className={isChecked ? "inactive" : "active"} onClick={handleClickHome}>帰り</button>
-            </p>
-          </div>
-          <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
+    <div className='way'>
+      <div className='tab-container'>
+        <button className={isChecked ? "active" : "inactive"} onClick={handleClickToSki}>行き</button>
+        <button className={isChecked ? "inactive" : "active"} onClick={handleClickHome}>帰り</button>
       </div>
 
-      <div className='results'>
-          <TripCandidateList tripCandidateProps={useTripCandidateRes.tripCandidateList} />
+      <div className='way-body'>
+        <div className="detailed-query block">
+            <div className='query-group'>
+              <p className='query-key'>
+                
+              </p>
+            </div>
+            <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
+        </div>
+  
+        <div className='results'>
+            <TripCandidateList tripCandidateProps={useTripCandidateRes.tripCandidateList} />
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 
