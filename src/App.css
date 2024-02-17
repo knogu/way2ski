@@ -39,13 +39,14 @@
 }
 
 .leg {
-  border-bottom: 1px solid #6C757D;
+  border-top: 1px solid #6C757D;
   padding: 5px 10px;
 }
 
 .trip-candidate {
-  border-top: 3px solid black; 
-  border-bottom: 3px solid black;
+  border: 1px solid #6C757D;
+  margin: 15px;
+  border-radius: 8px;
 }
 
 p {
