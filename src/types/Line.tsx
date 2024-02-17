@@ -29,6 +29,7 @@ function kagura2yuzawa(): Line {
             arrivalTime: new Date(2024, 1, 1, time.at(2), time.at(3), 0),
             arrivalStation: "越後湯沢",
             lineName: "南越後観光バス",
+            display: false,
         })
     });
     return {
@@ -54,6 +55,7 @@ function yuzawa2kagura(): Line {
             arrivalTime: new Date(2024, 1, 1, time.at(2), time.at(3), 0),
             arrivalStation: "かぐらスキー場",
             lineName: "南越後観光バス",
+            display: false,
         })
     });
     return {
@@ -92,6 +94,7 @@ function yuzawa2tokyo(): Line {
             arrivalTime: new Date(2024, 1, 1, time.at(2), time.at(3), 0),
             arrivalStation: "東京",
             lineName: "上越新幹線",
+            display: false,
         })
     });
     return {
@@ -125,6 +128,7 @@ function tokyo2yuzawa(): Line {
             arrivalTime: new Date(2024, 1, 1, time.at(2), time.at(3), 0),
             arrivalStation: "越後湯沢",
             lineName: "上越新幹線",
+            display: false,
         })
     });
     return {

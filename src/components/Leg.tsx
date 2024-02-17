@@ -4,6 +4,7 @@ export type LegProps = {
     arrivalTime: Date,
     arrivalStation: string,
     lineName: string,
+    display: boolean,
 }
 
 export function displayTime(date: Date) : string {
@@ -15,6 +16,11 @@ export function displayTime(date: Date) : string {
 }
 
 export const Leg = (legProps: LegProps) => {
+    if (!legProps.display) {
+        return (
+            <></>
+        );
+    }
     return (
         <div className="leg">
             <p className='leave'>{displayTime(legProps.departureTime) + " "}<span className='ms-2'>{legProps.departureStation}</span></p>
