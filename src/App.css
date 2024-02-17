@@ -27,19 +27,19 @@
 }
 
 .leg {
-  border-top: 1px solid #6C757D;
+  border-top: 0.1px solid #6C757D;
   padding: 5px 10px;
 }
 
 .trip-candidate {
-  border: 1px solid #6C757D;
+  border: 0.1px solid #6C757D;
   background-color: white;
   margin: 15px;
   border-radius: 8px;
 }
 
 .block {
-  border: 1px solid #6C757D;
+  border: 0.1px solid #6C757D;
   margin: 15px;
   border-radius: 8px;
   background-color: white;
@@ -105,12 +105,12 @@ button{
   line-height: 1;
   width: 1em;
   height: 1em;
-  border: 0.1em solid black;
+  border: 0.1em solid #6C757D;
   border-left: 0;
   border-bottom: 0;
   box-sizing: border-box;
   background-color: white;
-  margin-left: 5px;
+  margin-left: 7px;
 }
 
 .summary .inactive {
