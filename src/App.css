@@ -4,10 +4,10 @@
 }
 
 .main-date-place-query {
-  background-color: #f8f9fa;
+  /* background-color: #f8f9fa;
   padding: 20px 20px;
   margin-bottom: 15px;
-  border-bottom: 1px solid #ced4da;
+  border-bottom: 1px solid #ced4da; */
 }
 
 .main-date-place-query input {
@@ -26,9 +26,11 @@
 
 
 .place-query {
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
+  width: 100%;
+}
+
+.place-query input {
+  float: right;
 }
 
 .query-group {

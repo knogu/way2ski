@@ -66,11 +66,11 @@ function App() {
   return (
     <>
       <section className="main-date-place-query">
-        <div className='container'>
+        <div className='container block'>
             <div className='place-query'>
-              <input id="hometown-station" type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange} placeholder='出発駅'></input>
+              <p><label htmlFor="hometown-station" className="query-key">出発駅</label> <input id="hometown-station" type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange} placeholder='出発駅'></input></p>
               {/* todo: selectに変更 */}
-              <input id="ski-resort" type="text" value={placeDateQuery.skiResort} onChange={handleHometownStationChange} placeholder='スキー場'></input>
+              <p><label htmlFor="hometown-station" className="query-key">スキー場</label> <input id="ski-resort" type="text" value={placeDateQuery.skiResort} onChange={handleHometownStationChange} placeholder='スキー場'></input></p>
             </div>
             {/* todo: 日にち追加 */}
         </div>
