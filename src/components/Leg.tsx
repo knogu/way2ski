@@ -6,7 +6,7 @@ export type LegProps = {
     lineName: string,
 }
 
-function displayTime(date: Date) : string {
+export function displayTime(date: Date) : string {
     let m = date.getMinutes().toString();
     if (m.length === 1) {
         m = "0" + m;
