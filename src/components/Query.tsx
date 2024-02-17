@@ -58,8 +58,8 @@ export const QueryCmp = (props: QueryProps) => {
     return (
         <>
             <div className="time-query query-group">
-              <p> <input id="departAfter" type="time" onChange={handleDepartChange} value={date2inputVal(curQuery.departAfter)}></input><label htmlFor="departAfter" className="query-key">以降に出発</label></p>
-              <p><input id="arriveBefore" type="time" onChange={handleArriveChange} value={date2inputVal(curQuery.arriveBefore)}></input><label htmlFor="arriveBefore" className="query-key">以前に到着</label></p>
+              <p><label htmlFor="departAfter" className="query-key">出発時刻</label><input id="departAfter" type="time" onChange={handleDepartChange} value={date2inputVal(curQuery.departAfter)}></input><label htmlFor="departAfter">以降</label></p>
+              <p><label htmlFor="arriveBefore" className="query-key">到着時刻</label><input id="arriveBefore" type="time" onChange={handleArriveChange} value={date2inputVal(curQuery.arriveBefore)}></input><label htmlFor="arriveBefore">以前</label></p>
             </div>
             
             <div className="transit-query">
