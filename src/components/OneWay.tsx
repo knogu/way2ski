@@ -1,9 +1,10 @@
 import {DetailedQuery} from "./DetailedQuery";
 import {TripCandidateList} from "./TripCandidateList";
-import './OneWay.css';
 import { PlaceDateQueryProps } from "./PlaceDateQuery";
 import { useState } from "react";
-import { useOneWayTripCandidates, UseTripCandidatesRes } from '../hooks/tripCandidates';
+import { useDetailedQuery } from '../hooks/useDetailedQuery';
+import { genTripCandidateListProps } from "../types/Line";
+import './OneWay.css';
 
 export const OneWay = (placeDateQueryProps: PlaceDateQueryProps) => {
     const [isToSki, setIsToSki] = useState<boolean>(true);
@@ -16,8 +17,11 @@ export const OneWay = (placeDateQueryProps: PlaceDateQueryProps) => {
         setIsToSki(false);
     };
 
-    let useTripCandidateResToSki = useOneWayTripCandidates(placeDateQueryProps, true);
-    let useTripCandidateResHome = useOneWayTripCandidates(placeDateQueryProps, false);
+    let useTripCandidateResToSki = useDetailedQuery(true);
+    let useTripCandidateResHome = useDetailedQuery(false);
+
+    const candsToSki = genTripCandidateListProps(placeDateQueryProps, true, useTripCandidateResToSki.query);
+    const candsHome = genTripCandidateListProps(placeDateQueryProps, false, useTripCandidateResHome.query);
 
     return (
         <div className='way'>
@@ -39,7 +43,7 @@ export const OneWay = (placeDateQueryProps: PlaceDateQueryProps) => {
 
                     <div className='results'>
                         <TripCandidateList
-                            tripCandidateProps={isToSki ? useTripCandidateResToSki.tripCandidateList : useTripCandidateResHome.tripCandidateList}
+                            tripCandidateProps={isToSki ? candsToSki : candsHome}
                         />
                     </div>
                 </div>
