@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react"
+import './DetailedQuery.css';
 
 export type Query = {
     departAfter: Date,

@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import './PlaceDateQuery.css';
 
 export type PlaceDateQuery = {
     hometownStation: string,

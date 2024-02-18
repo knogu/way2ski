@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Leg, LegProps, displayTime } from "./Leg"
+import './TripCandidate.css';
 
 export type TripCandidateProps = {
     legProps: LegProps[],

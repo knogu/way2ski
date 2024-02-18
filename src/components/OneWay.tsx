@@ -1,6 +1,7 @@
 import {useTripCandidatesRes} from "../hooks/tripCandidates";
-import {QueryCmp} from "./Query";
+import {QueryCmp} from "./DetailedQuery";
 import {TripCandidateList} from "./TripCandidateList";
+import './OneWay.css';
 
 export const OneWay = (isChecked: boolean, handleClickToSki: ()=>void, handleClickHome: ()=>void, useTripCandidateRes: useTripCandidatesRes) => {
     return (

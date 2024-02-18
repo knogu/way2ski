@@ -1,0 +1,23 @@
+.tab-container button {
+  padding: 8px 24px;
+}
+
+.tab-container .active {
+  border: 1px solid #e4f1f5;
+  background-color: #e4f1f5;
+}
+
+.tab-container .inactive {
+  border: 1px solid #e4f1f5;
+}
+
+.way-body {
+  background-color: #e4f1f5;
+  padding-top: 5px; 
+  padding-bottom: 40px;
+}
+
+.tab-container {
+  border-bottom: 1px solid #e4f1f5;
+  margin-left: 15px;
+}

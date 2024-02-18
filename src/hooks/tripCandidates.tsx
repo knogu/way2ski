@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { QueryProps, QueryCmp, Query } from "../components/Query"
+import { QueryProps, QueryCmp, Query } from "../components/DetailedQuery"
 import { genTripCandidateListProps } from "../types/Line"
 import { TripCandidateProps } from "../components/TripCandidate"
 import { PlaceDateQuery } from "../components/PlaceDateQuery"

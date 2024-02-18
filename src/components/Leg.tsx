@@ -1,3 +1,5 @@
+import './Leg.css';
+
 export type LegProps = {
     departureTime: Date,
     departureStation: string,

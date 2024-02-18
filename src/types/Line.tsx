@@ -1,6 +1,6 @@
 import { LegProps } from "../components/Leg"
 import { TripCandidateProps } from "../components/TripCandidate";
-import { Query } from "../components/Query";
+import { Query } from "../components/DetailedQuery";
 import { PlaceDateQuery } from "../components/PlaceDateQuery";
 
 export type Line = {
