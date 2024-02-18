@@ -15,10 +15,10 @@ export const TripCandidate = (props: TripCandidateProps) => {
         setIsDetailDisplayed(!isDetailDisplayed);
     }
     return (
-        <button className="trip-candidate block" onClick={handleDetailClick}>
-            <div className="summary">
-                <p>{totalDepartureTime}発 → {totalArrivalTime}着 <button onClick={handleDetailClick} className={isDetailDisplayed ? "active" : "inactive"}></button></p>
-            </div>
+        <div className="trip-candidate block">
+            <button className="summary" onClick={handleDetailClick}>
+                <p>{totalDepartureTime}発 → {totalArrivalTime}着 <button className={isDetailDisplayed ? "active" : "inactive"}></button></p>
+            </button>
 
             {props.legProps.map((legProp, i) => {
                 const legProps = {
@@ -32,6 +32,6 @@ export const TripCandidate = (props: TripCandidateProps) => {
                 }
                 return Leg(legProps);
             })}
-        </button>
+        </div>
     )
 }

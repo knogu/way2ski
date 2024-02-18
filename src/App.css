@@ -154,6 +154,10 @@ button{
   padding-right: 4%;
 }
 
+.summary {
+  width: 100%;
+}
+
 .summary button {
   display: inline-block;
   vertical-align: middle;
