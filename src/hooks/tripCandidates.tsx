@@ -11,7 +11,7 @@ export type UseTripCandidatesRes = {
     setTripCandidateList: Dispatch<SetStateAction<TripCandidateProps[]>>,
 }
 
-export const useTripCandidates = (placeDateQuery: PlaceDateQueryProps, isToSki: boolean) => {
+export const useOneWayTripCandidates = (placeDateQuery: PlaceDateQueryProps, isToSki: boolean) => {
     let initialDepartAfter;
     let initialArriveBefore;
     if (isToSki) {
@@ -34,14 +34,7 @@ export const useTripCandidates = (placeDateQuery: PlaceDateQueryProps, isToSki: 
     const [tripCandidateList, setTripCandidateList] = useState(initialCands);
 
     useEffect(() => {
-        const query = initialQuery;
-        setQuery(query);
         const cands = genTripCandidateListProps(placeDateQuery, isToSki, query);
-        setTripCandidateList(cands);
-    }, [isToSki])
-
-    useEffect(() => {
-        const cands = genTripCandidateListProps(placeDateQuery ,isToSki, query);
         setTripCandidateList(cands);
     }, [query, placeDateQuery]) // placeDateQuery指定せずに再計算、再描画できないか？
 
