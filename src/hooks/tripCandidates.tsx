@@ -1,17 +1,17 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { QueryProps, QueryCmp, Query } from "../components/DetailedQuery"
+import { DetailedQueryProps, DetailedQuery, DetailedQueryFields } from "../components/DetailedQuery"
 import { genTripCandidateListProps } from "../types/Line"
 import { TripCandidateProps } from "../components/TripCandidate"
-import { PlaceDateQuery } from "../components/PlaceDateQuery"
+import { PlaceDateQueryProps } from "../components/PlaceDateQuery"
 
 export type useTripCandidatesRes = {
-    query: Query,
-    setQuery: Dispatch<SetStateAction<Query>>,
+    query: DetailedQueryFields,
+    setQuery: Dispatch<SetStateAction<DetailedQueryFields>>,
     tripCandidateList: TripCandidateProps[],
     setTripCandidateList: Dispatch<SetStateAction<TripCandidateProps[]>>,
 }
 
-export const useTripCandidates = (placeDateQuery: PlaceDateQuery, isToSki: boolean) => {
+export const useTripCandidates = (placeDateQuery: PlaceDateQueryProps, isToSki: boolean) => {
     let initialDepartAfter;
     let initialArriveBefore;
     if (isToSki) {
@@ -22,7 +22,7 @@ export const useTripCandidates = (placeDateQuery: PlaceDateQuery, isToSki: boole
         initialArriveBefore = new Date(2024, 1, 1, 23, 0, 0);
     }
     
-    const initialQuery: Query = {
+    const initialQuery: DetailedQueryFields = {
         departAfter: initialDepartAfter, arriveBefore: initialArriveBefore,
         transitMinutes: 5,
         isTransitMinutesEmpty: false,

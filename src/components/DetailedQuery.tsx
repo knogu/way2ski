@@ -1,16 +1,16 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react"
 import './DetailedQuery.css';
 
-export type Query = {
+export type DetailedQueryFields = {
     departAfter: Date,
     arriveBefore: Date,
     transitMinutes: number,
     isTransitMinutesEmpty: boolean,
 }
 
-export type QueryProps = {
-    query: Query,
-    setQuery: Dispatch<SetStateAction<Query>>
+export type DetailedQueryProps = {
+    query: DetailedQueryFields,
+    setQuery: Dispatch<SetStateAction<DetailedQueryFields>>
 }
 
 const date2inputVal = (date: Date) => {
@@ -19,8 +19,8 @@ const date2inputVal = (date: Date) => {
     return `${hours}:${minutes}`;
 }
 
-export const QueryCmp = (props: QueryProps) => {
-    let curQuery: Query = {departAfter: props.query.departAfter,
+export const DetailedQuery = (props: DetailedQueryProps) => {
+    let curQuery: DetailedQueryFields = {departAfter: props.query.departAfter,
                            arriveBefore: props.query.arriveBefore,
                            transitMinutes: props.query.transitMinutes,
                            isTransitMinutesEmpty: props.query.isTransitMinutesEmpty};
@@ -49,7 +49,7 @@ export const QueryCmp = (props: QueryProps) => {
         props.setQuery(curQuery);
     };
 
-    const displayedTransitMinutes = (curQuery: Query) => {
+    const displayedTransitMinutes = (curQuery: DetailedQueryFields) => {
         if (curQuery.isTransitMinutesEmpty) {
             return "";
         }

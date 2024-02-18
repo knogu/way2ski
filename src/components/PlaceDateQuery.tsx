@@ -1,13 +1,13 @@
 import { ChangeEvent } from "react";
 import './PlaceDateQuery.css';
 
-export type PlaceDateQuery = {
+export type PlaceDateQueryProps = {
     hometownStation: string,
     skiResort: string,
     date: Date,
 }
 
-export const PlaceDateQueryCmp = (placeDateQuery: PlaceDateQuery, handleHometownStationChange: (event: ChangeEvent<HTMLInputElement>) => void) => {
+export const PlaceDateQuery = (placeDateQuery: PlaceDateQueryProps, handleHometownStationChange: (event: ChangeEvent<HTMLInputElement>) => void) => {
     return (<>
         <section className="date-place-query">
         <div className='container'>

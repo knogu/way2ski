@@ -1,7 +1,7 @@
 import { LegProps } from "../components/Leg"
 import { TripCandidateProps } from "../components/TripCandidate";
-import { Query } from "../components/DetailedQuery";
-import { PlaceDateQuery } from "../components/PlaceDateQuery";
+import { DetailedQueryFields } from "../components/DetailedQuery";
+import { PlaceDateQueryProps } from "../components/PlaceDateQuery";
 
 export type Line = {
     departureStation: string,
@@ -138,7 +138,7 @@ function tokyo2yuzawa(): Line {
     }
 }
 
-function getLineList(placeDateQuery: PlaceDateQuery ,isToSki: boolean): Line[] {
+function getLineList(placeDateQuery: PlaceDateQueryProps ,isToSki: boolean): Line[] {
     if (isToSki) {
         return [tokyo2yuzawa(), yuzawa2kagura()];
     } else {
@@ -146,7 +146,7 @@ function getLineList(placeDateQuery: PlaceDateQuery ,isToSki: boolean): Line[] {
     }
 }
 
-function LineList2TripCandidateListProp(lineList: Line[], query: Query): TripCandidateProps[] {
+function LineList2TripCandidateListProp(lineList: Line[], query: DetailedQueryFields): TripCandidateProps[] {
     if (query.isTransitMinutesEmpty) {
         return [];
     }
@@ -204,6 +204,6 @@ function LineList2TripCandidateListProp(lineList: Line[], query: Query): TripCan
 }
 
 
-export function genTripCandidateListProps(placeDateQuery: PlaceDateQuery, isToSki: boolean, query: Query): TripCandidateProps[] {
+export function genTripCandidateListProps(placeDateQuery: PlaceDateQueryProps, isToSki: boolean, query: DetailedQueryFields): TripCandidateProps[] {
     return LineList2TripCandidateListProp(getLineList(placeDateQuery, isToSki), query);
 }

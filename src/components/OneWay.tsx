@@ -1,5 +1,5 @@
 import {useTripCandidatesRes} from "../hooks/tripCandidates";
-import {QueryCmp} from "./DetailedQuery";
+import {DetailedQuery} from "./DetailedQuery";
 import {TripCandidateList} from "./TripCandidateList";
 import './OneWay.css';
 
@@ -21,7 +21,7 @@ export const OneWay = (isChecked: boolean, handleClickToSki: ()=>void, handleCli
 
                             </p>
                         </div>
-                        <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
+                        <DetailedQuery query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
                     </div>
 
                     <div className='results'>
