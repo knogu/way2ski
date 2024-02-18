@@ -4,7 +4,7 @@ import { genTripCandidateListProps } from "../types/Line"
 import { TripCandidateProps } from "../components/TripCandidate"
 import { PlaceDateQueryProps } from "../components/PlaceDateQuery"
 
-export type useTripCandidatesRes = {
+export type UseTripCandidatesRes = {
     query: DetailedQueryFields,
     setQuery: Dispatch<SetStateAction<DetailedQueryFields>>,
     tripCandidateList: TripCandidateProps[],
@@ -45,7 +45,7 @@ export const useTripCandidates = (placeDateQuery: PlaceDateQueryProps, isToSki: 
         setTripCandidateList(cands);
     }, [query, placeDateQuery]) // placeDateQuery指定せずに再計算、再描画できないか？
 
-    const ret: useTripCandidatesRes = { 
+    const ret: UseTripCandidatesRes = { 
         query: query,
         setQuery: setQuery,
         tripCandidateList: tripCandidateList,

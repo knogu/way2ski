@@ -1,26 +1,35 @@
-import {useTripCandidatesRes} from "../hooks/tripCandidates";
 import {DetailedQuery} from "./DetailedQuery";
 import {TripCandidateList} from "./TripCandidateList";
 import './OneWay.css';
+import { PlaceDateQueryProps } from "./PlaceDateQuery";
+import { useState } from "react";
+import { useTripCandidates, UseTripCandidatesRes } from '../hooks/tripCandidates';
 
-export const OneWay = (isChecked: boolean, handleClickToSki: ()=>void, handleClickHome: ()=>void, useTripCandidateRes: useTripCandidatesRes) => {
+export const OneWay = (placeDateQueryProps: PlaceDateQueryProps) => {
+    const [isToSki, setIsToSki] = useState<boolean>(true);
+
+    const handleClickToSki = () => {
+        setIsToSki(true);
+    };
+
+    const handleClickHome = () => {
+        setIsToSki(false);
+    };
+
+    let useTripCandidateRes = useTripCandidates(placeDateQueryProps, isToSki);
+
     return (
         <div className='way'>
             <div className='container'>
                 <div className='tab-container'>
-                    <button className={isChecked ? "active" : "inactive"} onClick={handleClickToSki}>行き</button>
-                    <button className={isChecked ? "inactive" : "active"} onClick={handleClickHome}>帰り</button>
+                    <button className={isToSki ? "active" : "inactive"} onClick={handleClickToSki}>行き</button>
+                    <button className={isToSki ? "inactive" : "active"} onClick={handleClickHome}>帰り</button>
                 </div>
             </div>
 
             <div className='way-body'>
                 <div className='container'>
                     <div className="detailed-query block">
-                        <div className='query-group'>
-                            <p className='query-key'>
-
-                            </p>
-                        </div>
                         <DetailedQuery query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
                     </div>
 
