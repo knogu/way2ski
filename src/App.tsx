@@ -69,7 +69,7 @@ function App() {
 
   return (
     <>
-      <section className="main-date-place-query">
+      <section className="date-place-query">
         <div className='container'>
           <div className='block'>
               <div className='place-query'>
