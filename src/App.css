@@ -1,13 +1,10 @@
 .App {
   text-align: center;
-  
 }
 
 .main-date-place-query {
-  /* background-color: #f8f9fa;
-  padding: 20px 20px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ced4da; */
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .main-date-place-query input {
@@ -54,13 +51,15 @@
 .trip-candidate {
   border: 0.1px solid #6C757D;
   background-color: white;
-  margin: 15px;
   border-radius: 8px;
+  width: 100%;
+  display: block;
 }
 
 .block {
   border: 0.1px solid #6C757D;
-  margin: 15px;
+  /* margin: 15px; */
+  margin-top: 15px;
   border-radius: 8px;
   background-color: white;
 }
@@ -95,6 +94,7 @@ input {
 }
 
 .detailed-query {
+  margin-top: 15px;
   padding: 8px 15px;
 }
 
@@ -132,6 +132,14 @@ button{
   background-color: #e4f1f5;
   padding-top: 5px; 
   padding-bottom: 15px;
+}
+
+.container {
+  box-sizing: border-box;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 4%;
+  padding-right: 4%;
 }
 
 .summary button {

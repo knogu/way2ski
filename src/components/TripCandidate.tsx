@@ -15,7 +15,7 @@ export const TripCandidate = (props: TripCandidateProps) => {
         setIsDetailDisplayed(!isDetailDisplayed);
     }
     return (
-        <div className="trip-candidate">
+        <button className="trip-candidate block" onClick={handleDetailClick}>
             <div className="summary">
                 <p>{totalDepartureTime}発 → {totalArrivalTime}着 <button onClick={handleDetailClick} className={isDetailDisplayed ? "active" : "inactive"}></button></p>
             </div>
@@ -32,6 +32,6 @@ export const TripCandidate = (props: TripCandidateProps) => {
                 }
                 return Leg(legProps);
             })}
-        </div>
+        </button>
     )
 }
