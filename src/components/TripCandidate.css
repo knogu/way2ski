@@ -15,14 +15,14 @@
   vertical-align: middle;
   color: white;
   line-height: 1;
-  width: 1em;
-  height: 1em;
+  width: 0.7em;
+  height: 0.7em;
   border: 0.1em solid #6C757D;
   border-left: 0;
   border-bottom: 0;
   box-sizing: border-box;
   background-color: white;
-  margin-left: 7px;
+  margin-left: 8px;
 }
 
 .summary .inactive {
