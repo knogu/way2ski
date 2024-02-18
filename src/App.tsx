@@ -1,39 +1,8 @@
 import './App.css';
-import { TripCandidateList } from './components/TripCandidateList';
 import { useTripCandidates, useTripCandidatesRes } from './hooks/tripCandidates';
-import { QueryCmp } from './components/Query';
 import { ChangeEvent, useState } from 'react';
-import { PlaceDateQuery } from './components/PlaceDateQuery';
-
-const OneWay = (isChecked: boolean, handleClickToSki: ()=>void, handleClickHome: ()=>void, useTripCandidateRes: useTripCandidatesRes) => {
-  return (
-    <div className='way'>
-      <div className='container'>
-        <div className='tab-container'>
-          <button className={isChecked ? "active" : "inactive"} onClick={handleClickToSki}>行き</button>
-          <button className={isChecked ? "inactive" : "active"} onClick={handleClickHome}>帰り</button>
-        </div>
-      </div>
-
-      <div className='way-body'>
-        <div className='container'>
-          <div className="detailed-query block">
-              <div className='query-group'>
-                <p className='query-key'>
-                  
-                </p>
-              </div>
-              <QueryCmp query={useTripCandidateRes.query} setQuery={useTripCandidateRes.setQuery}/>
-          </div>
-    
-          <div className='results'>
-              <TripCandidateList tripCandidateProps={useTripCandidateRes.tripCandidateList} />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+import { PlaceDateQuery, PlaceDateQueryCmp } from './components/PlaceDateQuery';
+import { OneWay } from './components/OneWay';
 
 function App() {
   const [isToSki, setIsToSki] = useState<boolean>(true);
@@ -69,23 +38,8 @@ function App() {
 
   return (
     <>
-      <section className="date-place-query">
-        <div className='container'>
-          <div className='block'>
-              <div className='place-query'>
-                <p><label htmlFor="hometown-station" className="query-key">出発駅</label> <input id="hometown-station" type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange} placeholder='出発駅'></input></p>
-                {/* todo: selectに変更 */}
-                <p><label htmlFor="hometown-station" className="query-key">スキー場</label> <input id="ski-resort" type="text" value={placeDateQuery.skiResort} onChange={handleHometownStationChange} placeholder='スキー場'></input></p>
-              </div>
-              {/* todo: 日にち追加 */}
-          </div>
-        </div>
-      </section>
-      
-      <section className="main-results-and-detailed-query">
-        
+      {PlaceDateQueryCmp(placeDateQuery, handleHometownStationChange)}
       {OneWay(isToSki, handleClickToSki, handleClickHome, useTripCandidates(placeDateQuery, isToSki))}
-      </section>
     </>
   );
 }
