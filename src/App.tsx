@@ -19,7 +19,7 @@ function App() {
     })
   };
 
-  const handleSkiResortChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSkiResortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setPlaceDateQuery({
       ...placeDateQuery,
       skiResort: event.target.value,
@@ -28,7 +28,7 @@ function App() {
 
   return (
     <>
-      {PlaceDateQuery(placeDateQuery, handleHometownStationChange)}
+      {PlaceDateQuery(placeDateQuery, handleHometownStationChange, handleSkiResortChange)}
       {OneWay(placeDateQuery)}
     </>
   );

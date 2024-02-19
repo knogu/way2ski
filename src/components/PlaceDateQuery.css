@@ -3,12 +3,12 @@
   margin-bottom: 25px;
 }
 
-.date-place-query input {
+.date-place-query input, select {
   background-color: white;
-  
   padding: 2px 6px;
   height: 22px;
   font-size: 15px;
+  line-height: 16px;
 }
 
 .date-place-query label {
@@ -19,6 +19,7 @@
   width: 100%;
 }
 
-.place-query input {
+.place-query input, select {
   float: right;
+  width: 175px;
 }
