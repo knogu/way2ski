@@ -8,7 +8,7 @@ function App() {
   const initialPlaceDateQuery: PlaceDateQueryProps = {
     hometownStation: "東京",
     skiResort: "かぐらスキー場",
-    date: new Date(2024, 3, 13),
+    isHoliday: false,
   }
   const [placeDateQuery, setPlaceDateQuery] = useState<PlaceDateQueryProps>(initialPlaceDateQuery);
 
@@ -26,9 +26,16 @@ function App() {
     })
   };
 
+  const handleIsHolidayChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPlaceDateQuery({
+      ...placeDateQuery,
+      isHoliday: !placeDateQuery.isHoliday,
+    })
+  };
+
   return (
     <>
-      {PlaceDateQuery(placeDateQuery, handleHometownStationChange, handleSkiResortChange)}
+      {PlaceDateQuery(placeDateQuery, handleHometownStationChange, handleSkiResortChange, handleIsHolidayChange)}
       {OneWay(placeDateQuery)}
     </>
   );

@@ -102,6 +102,7 @@ skiResort2BusData["舞子スノーリゾート"] = maiko;
 function skiResortName2LineToSki(skiResort: string): Line {
     const busData = skiResort2BusData[skiResort];
     const legs: LegProps[] = [];
+    // todo: holiday.toSki, weekdays.toSkiでアクセスするように変更
     busData.toSki.forEach(timeList => {
         legs.push({
             departureTime: new Date(2024, 1, 1, timeList["越後湯沢"].at(0), timeList["越後湯沢"].at(1), 0),
