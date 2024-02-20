@@ -29,7 +29,7 @@ function App() {
   const handleIsHolidayChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPlaceDateQuery({
       ...placeDateQuery,
-      isHoliday: !placeDateQuery.isHoliday,
+      isHoliday: event.target.checked,
     })
   };
 

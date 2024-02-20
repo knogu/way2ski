@@ -85,25 +85,30 @@ function tokyo2yuzawa(): Line {
     }
 }
 
-type TimeList = {[key: string]: number[]};
+type TrainRun = {[key: string]: number[]};
+
+type lineOneDay = {
+    toSki: TrainRun[];
+    home: TrainRun[];
+}
 
 
 interface lineJson {
     lineName: string;
-    toSki: TimeList[];
-    home: TimeList[];
-  }
+    holidays: lineOneDay;
+    weekdays: lineOneDay;
+}
 
 let skiResort2BusData: { [key: string]: lineJson } = {};
 skiResort2BusData["かぐらスキー場"] = minamiechigo;
 skiResort2BusData["石打丸山スキー場"] = ishiuchimaruyama;
 skiResort2BusData["舞子スノーリゾート"] = maiko;
 
-function skiResortName2LineToSki(skiResort: string): Line {
+function skiResortName2LineToSki(skiResort: string, isHoliday: boolean): Line {
     const busData = skiResort2BusData[skiResort];
     const legs: LegProps[] = [];
-    // todo: holiday.toSki, weekdays.toSkiでアクセスするように変更
-    busData.toSki.forEach(timeList => {
+    const runs: TrainRun[] = isHoliday ? busData.holidays.toSki : busData.weekdays.toSki;
+    runs.forEach(timeList => {
         legs.push({
             departureTime: new Date(2024, 1, 1, timeList["越後湯沢"].at(0), timeList["越後湯沢"].at(1), 0),
             departureStation: "越後湯沢",
@@ -121,10 +126,11 @@ function skiResortName2LineToSki(skiResort: string): Line {
     }
 }
 
-function skiResortName2LineHome(skiResort: string): Line {
+function skiResortName2LineHome(skiResort: string, isHoliday: boolean): Line {
     const busData = skiResort2BusData[skiResort];
     const legs: LegProps[] = [];
-    busData.home.forEach(timeList => {
+    const runs: TrainRun[] = isHoliday ? busData.holidays.home : busData.weekdays.home;
+    runs.forEach(timeList => {
         legs.push({
             departureTime: new Date(2024, 1, 1, timeList[skiResort].at(0), timeList[skiResort].at(1), 0),
             departureStation: skiResort,
@@ -145,9 +151,9 @@ function skiResortName2LineHome(skiResort: string): Line {
 
 function getLineList(placeDateQuery: PlaceDateQueryProps ,isToSki: boolean): Line[] {
     if (isToSki) {
-        return [tokyo2yuzawa(), skiResortName2LineToSki(placeDateQuery.skiResort)];
+        return [tokyo2yuzawa(), skiResortName2LineToSki(placeDateQuery.skiResort, placeDateQuery.isHoliday)];
     } else {
-        return [skiResortName2LineHome(placeDateQuery.skiResort), yuzawa2tokyo()];
+        return [skiResortName2LineHome(placeDateQuery.skiResort, placeDateQuery.isHoliday), yuzawa2tokyo()];
     }
 }
 
