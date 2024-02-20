@@ -2,67 +2,14 @@ import { LegProps } from "../components/Leg"
 import { TripCandidateProps } from "../components/TripCandidate";
 import { DetailedQueryFields } from "../components/DetailedQuery";
 import { PlaceDateQueryProps } from "../components/PlaceDateQuery";
+import minamiechigo from "../json/minamiechigo-bus.json"
+import ishiuchimaruyama from "../json/ishiuchimaruyama-shuttle.json"
+import maiko from "../json/maiko-shuttle.json"
 
 export type Line = {
     departureStation: string,
     arrivalStation: string,
     legs: LegProps[],
-}
-
-function kagura2yuzawa(): Line {
-    const times = [
-        [12, 19, 12, 40],
-        [13, 14, 13, 38],
-        [14, 34, 14, 58],
-        [15, 4, 15, 25],
-        [16, 34, 16, 55],
-        [16, 59, 17, 20],
-        [17, 9, 17, 33],
-        [18, 39, 19, 3],
-        [19, 56, 20, 20],
-    ]
-    const legs: LegProps[] = [];
-    times.forEach(time => {
-        legs.push({
-            departureTime: new Date(2024, 1, 1, time.at(0), time.at(1), 0),
-            departureStation: "かぐらスキー場",
-            arrivalTime: new Date(2024, 1, 1, time.at(2), time.at(3), 0),
-            arrivalStation: "越後湯沢",
-            lineName: "南越後観光バス",
-            display: false,
-        })
-    });
-    return {
-        departureStation: "かぐらスキー場",
-        arrivalStation: "越後湯沢",
-        legs: legs, 
-    }
-}
-
-function yuzawa2kagura(): Line {
-    const times = [
-        [7, 40, 8, 0],
-        [8, 20, 8, 38],
-        [8, 40, 8, 58],
-        [9, 40, 9, 58],
-        [11, 0, 11, 18],
-    ]
-    const legs: LegProps[] = [];
-    times.forEach(time => {
-        legs.push({
-            departureTime: new Date(2024, 1, 1, time.at(0), time.at(1), 0),
-            departureStation: "越後湯沢",
-            arrivalTime: new Date(2024, 1, 1, time.at(2), time.at(3), 0),
-            arrivalStation: "かぐらスキー場",
-            lineName: "南越後観光バス",
-            display: false,
-        })
-    });
-    return {
-        departureStation: "越後湯沢",
-        arrivalStation: "かぐらスキー場",
-        legs: legs, 
-    }
 }
 
 function yuzawa2tokyo(): Line {
@@ -138,11 +85,68 @@ function tokyo2yuzawa(): Line {
     }
 }
 
+type TimeList = {[key: string]: number[]};
+
+
+interface lineJson {
+    lineName: string;
+    toSki: TimeList[];
+    home: TimeList[];
+  }
+
+let skiResort2BusData: { [key: string]: lineJson } = {};
+skiResort2BusData["かぐらスキー場"] = minamiechigo;
+skiResort2BusData["石打丸山スキー場"] = ishiuchimaruyama;
+skiResort2BusData["舞子スノーリゾート"] = maiko;
+
+function skiResortName2LineToSki(skiResort: string): Line {
+    const busData = skiResort2BusData[skiResort];
+    const legs: LegProps[] = [];
+    busData.toSki.forEach(timeList => {
+        legs.push({
+            departureTime: new Date(2024, 1, 1, timeList["越後湯沢"].at(0), timeList["越後湯沢"].at(1), 0),
+            departureStation: "越後湯沢",
+            arrivalTime: new Date(2024, 1, 1, timeList[skiResort].at(0), timeList[skiResort].at(1), 0),
+            arrivalStation: skiResort,
+            lineName: busData.lineName,
+            display: false,
+        })
+    })
+
+    return {
+        departureStation: "越後湯沢",
+        arrivalStation: skiResort,
+        legs: legs,
+    }
+}
+
+function skiResortName2LineHome(skiResort: string): Line {
+    const busData = skiResort2BusData[skiResort];
+    const legs: LegProps[] = [];
+    busData.home.forEach(timeList => {
+        legs.push({
+            departureTime: new Date(2024, 1, 1, timeList[skiResort].at(0), timeList[skiResort].at(1), 0),
+            departureStation: skiResort,
+            arrivalTime: new Date(2024, 1, 1, timeList["越後湯沢"].at(0), timeList["越後湯沢"].at(1), 0),
+            arrivalStation: "越後湯沢",
+            lineName: busData.lineName,
+            display: false,
+        })
+    })
+
+    return {
+        departureStation: skiResort,
+        arrivalStation: "越後湯沢",
+        legs: legs,
+    }
+}
+
+
 function getLineList(placeDateQuery: PlaceDateQueryProps ,isToSki: boolean): Line[] {
     if (isToSki) {
-        return [tokyo2yuzawa(), yuzawa2kagura()];
+        return [tokyo2yuzawa(), skiResortName2LineToSki(placeDateQuery.skiResort)];
     } else {
-        return [kagura2yuzawa(), yuzawa2tokyo()];
+        return [skiResortName2LineHome(placeDateQuery.skiResort), yuzawa2tokyo()];
     }
 }
 
