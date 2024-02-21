@@ -1,5 +1,9 @@
-.time-query .query-key {
-  margin-right: 15px;
+.detailed-query {
+  width: 100%;
+}
+
+.time-query .right-half {
+  padding-left: 30px;
 }
 
 .detailed-query p {
@@ -10,9 +14,10 @@
   width: 34px;
 }
 
-.detailed-query {
-  margin-top: 15px;
-  padding: 8px 15px;
+.detailed-query .label-left {
+  display: inline-block;
+  width: 40%;
+  text-align: center;
 }
 
 .detailed-query button {

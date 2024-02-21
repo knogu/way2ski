@@ -59,10 +59,23 @@ export const DetailedQuery = (props: DetailedQueryProps) => {
     return (
         <>
             <div className="time-query query-group">
-              <p><label htmlFor="departAfter" className="query-key">出発時刻</label><input id="departAfter" type="time" onChange={handleDepartChange} value={date2inputVal(curQuery.departAfter)}></input><label htmlFor="departAfter">以降</label></p>
-              <p><label htmlFor="arriveBefore" className="query-key">到着時刻</label><input id="arriveBefore" type="time" onChange={handleArriveChange} value={date2inputVal(curQuery.arriveBefore)}></input><label htmlFor="arriveBefore">以前</label></p>
+              <p>
+                  <label htmlFor="departAfter" className="query-key label-left">出発時刻</label>
+                  <div className="right-half">
+                    <input id="departAfter" type="time" onChange={handleDepartChange} value={date2inputVal(curQuery.departAfter)}></input>
+                    <label htmlFor="departAfter">以降</label>
+                  </div>
+              </p>
+                <p>
+                    <label htmlFor="arriveBefore" className="query-key label-left">到着時刻</label>
+                    <div className="right-half">
+                        <input id="arriveBefore" type="time" onChange={handleArriveChange}
+                               value={date2inputVal(curQuery.arriveBefore)}></input>
+                        <label htmlFor="arriveBefore">以前</label>
+                    </div>
+                </p>
             </div>
-            
+
             <div className="transit-query">
                 <div className='query-group'>
                     <p><label htmlFor="transit-minute" className="query-key">乗り換え時間（越後湯沢）</label><input id="transit-minute" type="number" onChange={handleTransitMinutesChange} value={displayedTransitMinutes(curQuery)}></input>分以上</p>
