@@ -27,7 +27,9 @@ export const PlaceDateQuery = (placeDateQuery: PlaceDateQueryProps, handleHometo
                 </p>
                 <p>
                     <label htmlFor="is-holiday">土休日</label>
-                    <input id="is-holiday" type="checkbox" value="土休日" checked={placeDateQuery.isHoliday} onChange={handleIsHolidayChange}/>
+                    <div className="right-half">
+                        <input id="is-holiday" type="checkbox" value="土休日" checked={placeDateQuery.isHoliday} onChange={handleIsHolidayChange}/>
+                    </div>
                 </p>
                 </div>
             </div>

@@ -13,15 +13,25 @@
 
 .date-place-query label {
   padding: 3px 6px;
+  display: inline-block;
+  width: 40%;
+  font-size: 15px;
+  text-align: center;
 }
 
 .place-query {
   width: 100%;
+  padding: 10px 0;
+}
+
+.place-query input, select {
+  width: 60%;
 }
 
 .place-query #hometown-station, select {
   float: right;
-  width: 175px;
+  width: 60%;
+  margin: 0;
 }
 
 input[type="checkbox"] {
@@ -30,6 +40,11 @@ input[type="checkbox"] {
   height: 16px;
   border: 1px solid #000;
   vertical-align: -5px;
+}
+
+.right-half {
+  float: right;
+  width: 60%;
 }
 
 /* todo: make look better */
