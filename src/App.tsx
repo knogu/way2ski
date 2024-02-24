@@ -1,12 +1,12 @@
 import './App.css';
 
-import { ChangeEvent, useState } from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import { PlaceDateQueryProps, PlaceDateQuery } from './components/PlaceDateQuery';
 import { OneWay } from './components/OneWay';
 
 function App() {
   const initialPlaceDateQuery: PlaceDateQueryProps = {
-    hometownStation: "東京",
+    hometownStation: "四ツ谷",
     skiResort: "かぐらスキー場",
     isHoliday: false,
   }
@@ -35,8 +35,8 @@ function App() {
 
   return (
     <>
-      {PlaceDateQuery(placeDateQuery, handleHometownStationChange, handleSkiResortChange, handleIsHolidayChange)}
-      {OneWay(placeDateQuery)}
+          {PlaceDateQuery(placeDateQuery, handleHometownStationChange, handleSkiResortChange, handleIsHolidayChange)}
+          {OneWay(placeDateQuery)}
     </>
   );
 }
