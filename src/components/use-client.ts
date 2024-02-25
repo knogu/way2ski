@@ -5,7 +5,7 @@ import { createConnectTransport } from "@connectrpc/connect-web";
 
 // This transport is going to be used throughout the app
 const defaultTransport = createConnectTransport({
-    baseUrl: "http://localhost:8080",
+    baseUrl: process.env.REACT_APP_API_BASE_URL!,
 });
 
 // A context to override the default transport in tests
