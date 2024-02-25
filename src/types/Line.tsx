@@ -1,5 +1,5 @@
 import { LegProps } from "../components/Leg"
-import {TripCandidate, TripCandidateProps} from "../components/TripCandidate";
+import {TripCandidateProps} from "../components/TripCandidate";
 import { DetailedQueryFields } from "../components/DetailedQuery";
 import { Leg, Run} from "../gen/way/v1/way_pb";
 
@@ -33,31 +33,27 @@ export function LineList2TripCandidateListProp(allLegs: Leg[], query: DetailedQu
     if (allLegs.length === 0) {
         return [];
     }
-    const lineCnt: number = allLegs.length;
-    const departAfter = query.departAfter;
-    const arriveBefore = query.arriveBefore;
-    let legIdx2CurRunIdx: number[] = new Array(lineCnt).fill(0);
+    let legIdx2CurRunIdx: number[] = new Array(allLegs.length).fill(0);
     let tripCandidates: TripCandidateProps[] = [];
-    for (let runIdxInFirst = 0; runIdxInFirst < allLegs.at(0)!.runs.length; runIdxInFirst++) {
+    for (let runIdxInFirst = 0; runIdxInFirst < allLegs[0].runs.length; runIdxInFirst++) {
         let isOk = true;
-        for (let legIdx = 1; legIdx < lineCnt; legIdx++) {
-            let lastArrivalTime: Date;
+        for (let legIdx = 1; legIdx < allLegs.length; legIdx++) {
+            let earliestPossibleDepartureTime: Date;
             if (legIdx === 1) {
-                lastArrivalTime = runToArrivalTime(allLegs.at(0)!.runs[runIdxInFirst]);
+                earliestPossibleDepartureTime = runToArrivalTime(allLegs[0].runs[runIdxInFirst]);
             } else {
-                lastArrivalTime = runToArrivalTime(allLegs.at(legIdx - 1)!.runs[legIdx2CurRunIdx[legIdx-1]]);
+                earliestPossibleDepartureTime = runToArrivalTime(allLegs[legIdx - 1].runs[legIdx2CurRunIdx[legIdx-1]]);
             }
-            const lastArrivalTimeCopy = new Date(lastArrivalTime.getTime());
-            lastArrivalTimeCopy.setMinutes(lastArrivalTime.getMinutes() + query.transitMinutes);
+            earliestPossibleDepartureTime.setMinutes(earliestPossibleDepartureTime.getMinutes() + query.transitMinutes);
 
             while (true) {
-                if (legIdx2CurRunIdx[legIdx] === allLegs.at(legIdx)!.runs.length) {
+                if (legIdx2CurRunIdx[legIdx] === allLegs[legIdx].runs.length) {
                     isOk = false;
                     break;
                 }
 
-                const departureTime = runToDepartureTime(allLegs.at(legIdx)!.runs.at(legIdx2CurRunIdx[legIdx])!);
-                if (lastArrivalTimeCopy <= departureTime) {
+                const departureTime = runToDepartureTime(allLegs[legIdx].runs[legIdx2CurRunIdx[legIdx]]);
+                if (earliestPossibleDepartureTime <= departureTime) {
                     break;
                 }
                 legIdx2CurRunIdx[legIdx] += 1;
@@ -67,15 +63,15 @@ export function LineList2TripCandidateListProp(allLegs: Leg[], query: DetailedQu
             }
         }
         if (isOk) {
-            const runsInCurTrip: LegProps[] = [runToLegProps(allLegs.at(0)!.runs.at(runIdxInFirst)!)];
+            const runsInCurTrip: LegProps[] = [runToLegProps(allLegs[0].runs[runIdxInFirst])];
             legIdx2CurRunIdx.forEach((runIdx, legIdx) => {
                 if (legIdx > 0)  {
-                    runsInCurTrip.push(runToLegProps(allLegs.at(legIdx)!.runs.at(runIdx)!));
+                    runsInCurTrip.push(runToLegProps(allLegs[legIdx].runs[runIdx]));
                 }
             })
             const curTrip: TripCandidateProps = {legProps: runsInCurTrip};
             const legLength = legIdx2CurRunIdx.length;
-            if (curTrip.legProps.length === legLength && departAfter <= curTrip.legProps.at(0)!.departureTime && curTrip.legProps.at(legLength-1)!.arrivalTime <= arriveBefore) {
+            if (curTrip.legProps.length === legLength && query.departAfter <= curTrip.legProps[0].departureTime && curTrip.legProps[legLength-1].arrivalTime <= query.arriveBefore) {
                 tripCandidates.push(curTrip);
             }
         }
