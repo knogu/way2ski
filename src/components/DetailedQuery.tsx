@@ -68,7 +68,7 @@ export const DetailedQuery = (props: DetailedQueryProps) => {
 
             <div className="transit-query">
                 <div className='query-group'>
-                    <p>乗り換え時間</p>
+                    <p className="transit-query-title">乗り換え時間</p>
 
                     {
                         Object.keys(props.staNameToTransTime).map(staName => {

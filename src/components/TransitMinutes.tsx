@@ -15,13 +15,16 @@ const displayedTransitMinutes = (minutes: number) => {
 
 export const TransitMinutes = (props: TransitMinutesProps) => {
     return (
-        <>
-        <label htmlFor="transit-minute" className="query-key">
-            {props.stationName}
-        </label>
+        <p>
+            <label htmlFor="transit-minute" className="query-key label-left">
+                {props.stationName}
+            </label>
 
-        <input id="transit-minute" type="number" onChange={props.handleTransitMinutesChange}
-               value={displayedTransitMinutes(props.minutes)}/>
-        </>
-    )
+            <div className="right-half">
+                <input id="transit-minute" type="number" onChange={props.handleTransitMinutesChange}
+                       value={displayedTransitMinutes(props.minutes)}/>
+                分
+            </div>
+        </p>
+)
 }

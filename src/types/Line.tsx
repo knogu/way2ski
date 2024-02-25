@@ -36,12 +36,18 @@ function IsAllTransitMinutesFilled(staNameToTransitTime: { [key: string]: number
 }
 
 export function LineList2TripCandidateListProp(allLegs: Leg[], query: DetailedQueryFields, staNameToTransitTime: { [key: string]: number }): TripCandidateProps[] {
-    if (!IsAllTransitMinutesFilled(staNameToTransitTime)) {
-        return [];
-    }
     if (allLegs.length === 0) {
         return [];
     }
+    for (const leg of allLegs) {
+        if (leg.runs.length === 0) {
+            return [];
+        }
+    }
+    if (!IsAllTransitMinutesFilled(staNameToTransitTime)) {
+        return [];
+    }
+
     let legIdx2CurRunIdx: number[] = new Array(allLegs.length).fill(0);
     let tripCandidates: TripCandidateProps[] = [];
     for (let runIdxInFirst = 0; runIdxInFirst < allLegs[0].runs.length; runIdxInFirst++) {

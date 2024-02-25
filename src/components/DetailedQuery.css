@@ -2,11 +2,11 @@
   width: 100%;
 }
 
-.time-query .right-half {
+.detailed-query .right-half {
   padding-left: 30px;
 }
 
-.detailed-query p {
+.time-query p {
   margin: 8px;
 }
 
@@ -38,4 +38,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   width: 100%;
   height: 100%;
   opacity: 0;
+}
+
+.transit-query-title {
+  margin-left: 30px;
+}
+
+.transit-query input {
+  width: 50px; /* todo: スマホの時はもう少し小さく */
+  padding: 0 5px;
 }
