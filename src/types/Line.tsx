@@ -1,5 +1,5 @@
 import { LegProps } from "../components/Leg"
-import { TripCandidateProps } from "../components/TripCandidate";
+import {TripCandidate, TripCandidateProps} from "../components/TripCandidate";
 import { DetailedQueryFields } from "../components/DetailedQuery";
 import { Leg, Run} from "../gen/way/v1/way_pb";
 
@@ -80,5 +80,31 @@ export function LineList2TripCandidateListProp(allLegs: Leg[], query: DetailedQu
             }
         }
     }
-    return tripCandidates;
+
+    const res: TripCandidateProps[] = [];
+    for (let i = 0; i < tripCandidates.length-1; i++) {
+        const curDepartureTimes = convTripCandidateToDepartureTimes(tripCandidates[i])
+        const nextDepartureTimes = convTripCandidateToDepartureTimes(tripCandidates[i+1])
+        let shouldTakeCur = true
+        for (let j = 0; j < curDepartureTimes.length; j++) {
+            if (curDepartureTimes[j].getTime() === nextDepartureTimes[j].getTime()) {
+                shouldTakeCur = false
+                break
+            }
+        }
+        if (shouldTakeCur) {
+            res.push(tripCandidates[i])
+        }
+    }
+    return res;
+}
+
+const convTripCandidateToDepartureTimes = (tripCandidateProps: TripCandidateProps) => {
+    const ret: Date[] = [];
+    for (let i = 0; i < tripCandidateProps.legProps.length; i++) {
+        ret.push(
+            tripCandidateProps.legProps[i].departureTime
+        )
+    }
+    return ret
 }
