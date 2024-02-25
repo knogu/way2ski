@@ -5,7 +5,6 @@ export type DetailedQueryFields = {
     departAfter: Date,
     arriveBefore: Date,
     transitMinutes: number,
-    isTransitMinutesEmpty: boolean,
 }
 
 export type DetailedQueryProps = {
@@ -22,8 +21,7 @@ const date2inputVal = (date: Date) => {
 export const DetailedQuery = (props: DetailedQueryProps) => {
     let curQuery: DetailedQueryFields = {departAfter: props.query.departAfter,
                            arriveBefore: props.query.arriveBefore,
-                           transitMinutes: props.query.transitMinutes,
-                           isTransitMinutesEmpty: props.query.isTransitMinutesEmpty};
+                           transitMinutes: props.query.transitMinutes};
     const handleDepartChange = (event: ChangeEvent<HTMLInputElement>) => {
         const [h, m] = event.target.value.split(':').map(Number);
         curQuery.departAfter = new Date(2024, 1, 1, h, m, 0);
@@ -37,23 +35,15 @@ export const DetailedQuery = (props: DetailedQueryProps) => {
     };
 
     const handleTransitMinutesChange = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.value === "") {
-            curQuery.isTransitMinutesEmpty = true;
-        } else {
-            const newTransitMinutes = parseInt(event.target.value);
-            if (newTransitMinutes) {
-                curQuery.transitMinutes = newTransitMinutes;
-                curQuery.isTransitMinutesEmpty = false;
-            }
-        }
+        curQuery.transitMinutes = parseInt(event.target.value);
         props.setQuery(curQuery);
     };
 
     const displayedTransitMinutes = (curQuery: DetailedQueryFields) => {
-        if (curQuery.isTransitMinutesEmpty) {
-            return "";
+        if (isNaN(curQuery.transitMinutes)) {
+            return ""
         }
-        return curQuery.transitMinutes.toString();
+        return curQuery.transitMinutes.toString()
     } 
 
     return (

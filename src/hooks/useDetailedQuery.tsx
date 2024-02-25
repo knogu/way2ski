@@ -6,7 +6,7 @@ export type UseDetailedQueryRes = {
     setQuery: Dispatch<SetStateAction<DetailedQueryFields>>,
 }
 
-export const useDetailedQuery = (isToSki: boolean) => {
+export const useDetailedQuery = (isToSki: boolean, transitStations: string[]) => {
     let initialDepartAfter;
     let initialArriveBefore;
     if (isToSki) {
@@ -20,7 +20,6 @@ export const useDetailedQuery = (isToSki: boolean) => {
     const initialQuery: DetailedQueryFields = {
         departAfter: initialDepartAfter, arriveBefore: initialArriveBefore,
         transitMinutes: 5,
-        isTransitMinutesEmpty: false,
     };
     
     const [query, setQuery] = useState(initialQuery);

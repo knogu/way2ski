@@ -27,7 +27,7 @@ function runToLegProps(run: Run): LegProps {
 }
 
 export function LineList2TripCandidateListProp(allLegs: Leg[], query: DetailedQueryFields): TripCandidateProps[] {
-    if (query.isTransitMinutesEmpty) {
+    if (isNaN(query.transitMinutes)) {
         return [];
     }
     if (allLegs.length === 0) {

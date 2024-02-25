@@ -7,7 +7,7 @@ import './OneWay.css';
 import {PlaceDateQueryProps} from "./PlaceDateQuery";
 import {useClient} from "./use-client";
 import {service} from "../gen/way/v1/way-WayService_connectquery";
-import {GetLinesRequest, GetLinesResponse} from "../gen/way/v1/way_pb";
+import {GetLinesRequest, GetLinesResponse, Leg} from "../gen/way/v1/way_pb";
 
 const convPlaceDateQueryToGetLinesReq = (query: PlaceDateQueryProps) => {
     const request = new GetLinesRequest();
@@ -15,6 +15,14 @@ const convPlaceDateQueryToGetLinesReq = (query: PlaceDateQueryProps) => {
     request.skiResort = query.skiResort;
     request.isHoliday = query.isHoliday;
     return request;
+}
+
+const extractTransiteStations = (legs: Leg[]) => {
+    const ret: string[] = [];
+    for (let i = 0; i < legs.length - 1; i++) {
+        ret.push(legs[i].arrivalStation)
+    }
+    return ret
 }
 
 export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
@@ -42,8 +50,10 @@ export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
         setIsToSki(false);
     };
 
-    let useTripCandidateResToSki = useDetailedQuery(true);
-    let useTripCandidateResHome = useDetailedQuery(false);
+    let useTripCandidateResToSki = useDetailedQuery(true,
+                                                                               extractTransiteStations(getLinesResponse.allLegsToSki));
+    let useTripCandidateResHome = useDetailedQuery(false,
+                                                                            　　extractTransiteStations(getLinesResponse.allLegsHome));
 
     let candsToSki = LineList2TripCandidateListProp(getLinesResponse.allLegsToSki, useTripCandidateResToSki.query);
     let candsHome = LineList2TripCandidateListProp(getLinesResponse.allLegsHome, useTripCandidateResHome.query);
