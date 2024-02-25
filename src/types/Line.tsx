@@ -92,6 +92,7 @@ export function LineList2TripCandidateListProp(allLegs: Leg[], query: DetailedQu
             res.push(tripCandidates[i])
         }
     }
+    res.push(tripCandidates[tripCandidates.length-1])
     return res;
 }
 
