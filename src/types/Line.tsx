@@ -26,8 +26,17 @@ function runToLegProps(run: Run): LegProps {
     }
 }
 
-export function LineList2TripCandidateListProp(allLegs: Leg[], query: DetailedQueryFields): TripCandidateProps[] {
-    if (isNaN(query.transitMinutes)) {
+function IsAllTransitMinutesFilled(staNameToTransitTime: { [key: string]: number }) {
+    for (let staName in staNameToTransitTime) {
+        if (staNameToTransitTime.hasOwnProperty(staName) && isNaN(staNameToTransitTime[staName])) {
+            return false
+        }
+    }
+    return true
+}
+
+export function LineList2TripCandidateListProp(allLegs: Leg[], query: DetailedQueryFields, staNameToTransitTime: { [key: string]: number }): TripCandidateProps[] {
+    if (!IsAllTransitMinutesFilled(staNameToTransitTime)) {
         return [];
     }
     if (allLegs.length === 0) {
@@ -37,14 +46,12 @@ export function LineList2TripCandidateListProp(allLegs: Leg[], query: DetailedQu
     let tripCandidates: TripCandidateProps[] = [];
     for (let runIdxInFirst = 0; runIdxInFirst < allLegs[0].runs.length; runIdxInFirst++) {
         let isOk = true;
+        legIdx2CurRunIdx[0] = runIdxInFirst
         for (let legIdx = 1; legIdx < allLegs.length; legIdx++) {
-            let earliestPossibleDepartureTime: Date;
-            if (legIdx === 1) {
-                earliestPossibleDepartureTime = runToArrivalTime(allLegs[0].runs[runIdxInFirst]);
-            } else {
-                earliestPossibleDepartureTime = runToArrivalTime(allLegs[legIdx - 1].runs[legIdx2CurRunIdx[legIdx-1]]);
-            }
-            earliestPossibleDepartureTime.setMinutes(earliestPossibleDepartureTime.getMinutes() + query.transitMinutes);
+            const prevLeg = allLegs[legIdx - 1];
+            let earliestPossibleDepartureTime = runToArrivalTime(prevLeg.runs[legIdx2CurRunIdx[legIdx-1]])
+            const transitTime = staNameToTransitTime[prevLeg.arrivalStation]
+            earliestPossibleDepartureTime.setMinutes(earliestPossibleDepartureTime.getMinutes() + transitTime);
 
             while (true) {
                 if (legIdx2CurRunIdx[legIdx] === allLegs[legIdx].runs.length) {

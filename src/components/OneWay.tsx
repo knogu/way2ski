@@ -50,13 +50,16 @@ export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
         setIsToSki(false);
     };
 
-    let useTripCandidateResToSki = useDetailedQuery(true,
-                                                                               extractTransiteStations(getLinesResponse.allLegsToSki));
-    let useTripCandidateResHome = useDetailedQuery(false,
-                                                                            　　extractTransiteStations(getLinesResponse.allLegsHome));
-
-    let candsToSki = LineList2TripCandidateListProp(getLinesResponse.allLegsToSki, useTripCandidateResToSki.query);
-    let candsHome = LineList2TripCandidateListProp(getLinesResponse.allLegsHome, useTripCandidateResHome.query);
+    let useTripCandidateResToSki = useDetailedQuery(true, extractTransiteStations(getLinesResponse.allLegsToSki));
+    let useTripCandidateResHome = useDetailedQuery(false, extractTransiteStations(getLinesResponse.allLegsHome));
+    let candsToSki = LineList2TripCandidateListProp(
+                                            getLinesResponse.allLegsToSki,
+                                            useTripCandidateResToSki.query,
+                                            useTripCandidateResToSki.staNameToTransitMinutes);
+    let candsHome = LineList2TripCandidateListProp(
+                                            getLinesResponse.allLegsHome,
+                                            useTripCandidateResHome.query,
+                                            useTripCandidateResHome.staNameToTransitMinutes);
 
     return (
 
@@ -74,6 +77,8 @@ export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
                             <DetailedQuery
                                 query={isToSki ? useTripCandidateResToSki.query : useTripCandidateResHome.query}
                                 setQuery={isToSki ? useTripCandidateResToSki.setQuery : useTripCandidateResHome.setQuery}
+                                staNameToTransTime={isToSki ? useTripCandidateResToSki.staNameToTransitMinutes : useTripCandidateResHome.staNameToTransitMinutes}
+                                setStaNameToTransTime={isToSki ? useTripCandidateResToSki.setStaNameToTransitMinutes : useTripCandidateResHome.setStaNameToTransitMinutes}
                             />
                         </div>
 
