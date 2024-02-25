@@ -133,7 +133,17 @@ export class Run extends Message<Run> {
  */
 export class Leg extends Message<Leg> {
   /**
-   * @generated from field: repeated way.v1.Run runs = 1;
+   * @generated from field: string departure_station = 1;
+   */
+  departureStation = "";
+
+  /**
+   * @generated from field: string arrival_station = 2;
+   */
+  arrivalStation = "";
+
+  /**
+   * @generated from field: repeated way.v1.Run runs = 3;
    */
   runs: Run[] = [];
 
@@ -145,7 +155,9 @@ export class Leg extends Message<Leg> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "way.v1.Leg";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "runs", kind: "message", T: Run, repeated: true },
+    { no: 1, name: "departure_station", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "arrival_station", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "runs", kind: "message", T: Run, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Leg {
