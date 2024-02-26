@@ -4,22 +4,28 @@
 // @ts-nocheck
 
 import { createQueryService } from "@bufbuild/connect-query";
-import { MethodKind } from "@bufbuild/protobuf";
-import { GetLinesRequest, GetLinesResponse } from "./way_pb";
+import { Empty, MethodKind } from "@bufbuild/protobuf";
+import { GetHometownStationsResponse, GetLinesRequest, GetLinesResponse } from "./way_pb.js";
 
 export const typeName = "way.v1.WayService";
 
 /**
- * @generated from rpc way.v1.WayService.GetLines
+ * @generated from rpc way.v1.WayService
  */
-export const service = {
-    typeName: "way.v1.WayService",
-    methods: {
-      getLines: {
-        name: "GetLines",
-        kind: MethodKind.Unary,
-        I: GetLinesRequest,
-        O: GetLinesResponse,
-      },
-    }
-  } as const;
+export const WayService = {
+  methods: {
+    getLines: {
+      name: "GetLines",
+      kind: MethodKind.Unary,
+      I: GetLinesRequest,
+      O: GetLinesResponse,
+    },
+    getHometownStations: {
+      name: "GetHometownStations",
+      kind: MethodKind.Unary,
+      I: Empty,
+      O: GetHometownStationsResponse,
+    },
+  },
+  typeName: "way.v1.WayService",
+} as const

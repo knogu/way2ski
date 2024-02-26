@@ -7,6 +7,74 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from message way.v1.GetHometownStationsRequest
+ */
+export class GetHometownStationsRequest extends Message<GetHometownStationsRequest> {
+  constructor(data?: PartialMessage<GetHometownStationsRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "way.v1.GetHometownStationsRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetHometownStationsRequest {
+    return new GetHometownStationsRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetHometownStationsRequest {
+    return new GetHometownStationsRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetHometownStationsRequest {
+    return new GetHometownStationsRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetHometownStationsRequest | PlainMessage<GetHometownStationsRequest> | undefined, b: GetHometownStationsRequest | PlainMessage<GetHometownStationsRequest> | undefined): boolean {
+    return proto3.util.equals(GetHometownStationsRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message way.v1.GetHometownStationsResponse
+ */
+export class GetHometownStationsResponse extends Message<GetHometownStationsResponse> {
+  /**
+   * @generated from field: repeated string hometown_stations = 1;
+   */
+  hometownStations: string[] = [];
+
+  constructor(data?: PartialMessage<GetHometownStationsResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "way.v1.GetHometownStationsResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "hometown_stations", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetHometownStationsResponse {
+    return new GetHometownStationsResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetHometownStationsResponse {
+    return new GetHometownStationsResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetHometownStationsResponse {
+    return new GetHometownStationsResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetHometownStationsResponse | PlainMessage<GetHometownStationsResponse> | undefined, b: GetHometownStationsResponse | PlainMessage<GetHometownStationsResponse> | undefined): boolean {
+    return proto3.util.equals(GetHometownStationsResponse, a, b);
+  }
+}
+
+/**
  * @generated from message way.v1.GetLinesRequest
  */
 export class GetLinesRequest extends Message<GetLinesRequest> {
