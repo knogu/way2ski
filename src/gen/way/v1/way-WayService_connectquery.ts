@@ -3,9 +3,8 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { createQueryService } from "@bufbuild/connect-query";
-import { Empty, MethodKind } from "@bufbuild/protobuf";
-import { GetHometownStationsResponse, GetLinesRequest, GetLinesResponse } from "./way_pb.js";
+import { MethodKind } from "@bufbuild/protobuf";
+import { GetHometownStationsRequest, GetHometownStationsResponse, GetLinesRequest, GetLinesResponse } from "./way_pb";
 
 export const typeName = "way.v1.WayService";
 
@@ -23,7 +22,7 @@ export const WayService = {
     getHometownStations: {
       name: "GetHometownStations",
       kind: MethodKind.Unary,
-      I: Empty,
+      I: GetHometownStationsRequest,
       O: GetHometownStationsResponse,
     },
   },

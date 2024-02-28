@@ -6,7 +6,7 @@ import {LineList2TripCandidateListProp} from "../types/Line";
 import './OneWay.css';
 import {PlaceDateQueryProps} from "./PlaceDateQuery";
 import {useClient} from "./use-client";
-import {service} from "../gen/way/v1/way-WayService_connectquery";
+import {WayService} from "../gen/way/v1/way-WayService_connectquery";
 import {GetLinesRequest, GetLinesResponse, Leg} from "../gen/way/v1/way_pb";
 
 const convPlaceDateQueryToGetLinesReq = (query: PlaceDateQueryProps) => {
@@ -26,7 +26,7 @@ const extractTransiteStations = (legs: Leg[]) => {
 }
 
 export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
-    const client = useClient(service);
+    const client = useClient(WayService);
     let temp: GetLinesResponse = new GetLinesResponse();
     let [getLinesResponse, setGetLinesResponse] = useState<GetLinesResponse>(temp);
 
@@ -37,7 +37,9 @@ export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
     };
 
     useEffect(() => {
-        send(convPlaceDateQueryToGetLinesReq(placeDateQuery))
+        if (placeDateQuery.isHometownStationValid) {
+            send(convPlaceDateQueryToGetLinesReq(placeDateQuery))
+        }
     }, [placeDateQuery]);
 
     const [isToSki, setIsToSki] = useState<boolean>(true);
@@ -83,9 +85,12 @@ export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
                         </div>
 
                         <div className='results'>
-                            <TripCandidateList
-                                tripCandidateProps={isToSki ? candsToSki : candsHome}
-                            />
+                            {
+                                placeDateQuery.hometownStation === ""?
+                                <></>
+                                :
+                                <TripCandidateList tripCandidateProps={isToSki ? candsToSki : candsHome}/>
+                            }
                         </div>
                     </div>
                 </div>
