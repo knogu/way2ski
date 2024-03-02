@@ -77,3 +77,26 @@ input, select {
 p {
   margin: 10px;
 }
+
+.description {
+  padding-top: 15px;
+}
+
+.description p {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+@media screen and (min-width:475px) {
+  .description {
+    padding-top: 30px;
+  }
+
+  .description p {
+    padding: 0;
+  }
+}
