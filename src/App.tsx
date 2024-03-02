@@ -9,7 +9,7 @@ import {GetHometownStationsRequest} from "./gen/way/v1/way_pb";
 
 function App() {
   const initialPlaceDateQuery: PlaceDateQueryProps = {
-    hometownStation: "四ツ谷",
+    hometownStation: "東京",
     skiResort: "かぐらスキー場",
     isHometownStationValid: true,
     isHoliday: false,
