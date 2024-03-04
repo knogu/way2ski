@@ -55,7 +55,7 @@ function App() {
       <>
         <div className='description'>
           <p>東京駅・越後湯沢駅経由でスキー場に行く際の電車・バスの時刻を調べられます</p>
-          <p>山手線・中央線内の出発駅に対応しています</p>
+          <p>山手線・中央線・京葉線内の出発駅に対応しています</p>
         </div>
         {PlaceDateQuery(placeDateQuery, handleHometownStationChange, handleSkiResortChange, handleIsHolidayChange)}
         {OneWay(placeDateQuery)}
