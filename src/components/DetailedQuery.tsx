@@ -10,6 +10,7 @@ export type DetailedQueryFields = {
 export type DetailedQueryProps = {
     query: DetailedQueryFields,
     setQuery: Dispatch<SetStateAction<DetailedQueryFields>>
+    transitStations: string[]
     staNameToTransTime: { [key: string]: number }
     setStaNameToTransTime: Dispatch<SetStateAction<{ [key: string]: number }>>
 }
@@ -71,7 +72,7 @@ export const DetailedQuery = (props: DetailedQueryProps) => {
                     <p className="transit-query-title">乗り換え時間</p>
 
                     {
-                        Object.keys(props.staNameToTransTime).map(staName => {
+                        props.transitStations.map(staName => {
                             return <TransitMinutes stationName={staName}
                                                    minutes={props.staNameToTransTime[staName]}
                                                    handleTransitMinutesChange={handleTransitMinutesChange(staName)}/>

@@ -63,6 +63,14 @@ export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
                                             useTripCandidateResHome.query,
                                             useTripCandidateResHome.staNameToTransitMinutes);
 
+    function legs2transitStations(legs: Leg[]): string[] {
+        let res = []
+        for (let i = 0; i < legs.length - 1; i++) {
+            res.push(legs[i].arrivalStation)
+        }
+        return res
+    }
+
     return (
 
             <div className='way'>
@@ -79,6 +87,7 @@ export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
                             <DetailedQuery
                                 query={isToSki ? useTripCandidateResToSki.query : useTripCandidateResHome.query}
                                 setQuery={isToSki ? useTripCandidateResToSki.setQuery : useTripCandidateResHome.setQuery}
+                                transitStations={isToSki ? legs2transitStations(getLinesResponse.allLegsToSki) : legs2transitStations(getLinesResponse.allLegsHome)}
                                 staNameToTransTime={isToSki ? useTripCandidateResToSki.staNameToTransitMinutes : useTripCandidateResHome.staNameToTransitMinutes}
                                 setStaNameToTransTime={isToSki ? useTripCandidateResToSki.setStaNameToTransitMinutes : useTripCandidateResHome.setStaNameToTransitMinutes}
                             />
