@@ -23,12 +23,12 @@ export const PlaceDateQuery = (placeDateQuery: PlaceDateQueryProps, handleHometo
                             </div>
                         : <></>
                     }
-                    <p>
+                    <p className="flex-center">
 
                         <label htmlFor="hometown-station" className="query-key">出発駅</label>
                         <input id="hometown-station" type="text" value={placeDateQuery.hometownStation} onChange={handleHometownStationChange} placeholder='例：東京'></input>
                     </p>
-                    <p>
+                    <p className="flex-center">
                         <label htmlFor="ski-resort" className="query-key">スキー場</label>
                         <select id="ski-resort" value={placeDateQuery.skiResort} onChange={handleSkiResortChange}>
                             <option value="かぐらスキー場">かぐらスキー場</option>
@@ -36,10 +36,11 @@ export const PlaceDateQuery = (placeDateQuery: PlaceDateQueryProps, handleHometo
                             <option value="舞子スノーリゾート">舞子スノーリゾート</option>
                         </select>
                     </p>
-                    <p>
+                    <p className="flex-center">
                         <label htmlFor="is-holiday">土休日</label>
                         <div className="right-half">
-                            <input id="is-holiday" type="checkbox" value="土休日" checked={placeDateQuery.isHoliday} onChange={handleIsHolidayChange}/>
+                            <input id="is-holiday" type="checkbox" value="土休日" checked={placeDateQuery.isHoliday}
+                                   onChange={handleIsHolidayChange}/>
                         </div>
                     </p>
                 </div>

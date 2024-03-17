@@ -50,14 +50,14 @@ export const DetailedQuery = (props: DetailedQueryProps) => {
     return (
         <>
             <div className="time-query query-group">
-              <p>
+              <p className="flex-center">
                   <label htmlFor="departAfter" className="query-key label-left">出発時刻</label>
                   <div className="right-half">
                     <input id="departAfter" type="time" onChange={handleDepartChange} value={date2inputVal(curQuery.departAfter)}></input>
                     <label htmlFor="departAfter">以降</label>
                   </div>
               </p>
-                <p>
+                <p className="flex-center">
                     <label htmlFor="arriveBefore" className="query-key label-left">到着時刻</label>
                     <div className="right-half">
                         <input id="arriveBefore" type="time" onChange={handleArriveChange}

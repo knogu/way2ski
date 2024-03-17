@@ -91,6 +91,11 @@ p {
   margin-bottom: 5px;
 }
 
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (min-width:475px) {
   .description {
     padding-top: 30px;
