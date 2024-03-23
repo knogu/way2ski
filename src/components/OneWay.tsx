@@ -95,10 +95,9 @@ export const OneWay = (placeDateQuery: PlaceDateQueryProps) => {
 
                         <div className='results'>
                             {
-                                placeDateQuery.hometownStation === ""?
+                                placeDateQuery.isHometownStationValid ?
+                                <TripCandidateList tripCandidateProps={isToSki ? candsToSki : candsHome}/>:
                                 <></>
-                                :
-                                <TripCandidateList tripCandidateProps={isToSki ? candsToSki : candsHome}/>
                             }
                         </div>
                     </div>
