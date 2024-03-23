@@ -18,8 +18,8 @@ export const PlaceDateQuery = (placeDateQuery: PlaceDateQueryProps, handleHometo
                 <div className='place-query'>
                     {
                         isWarnDisplayed ?
-                            <div className="warn-right">
-                                <p>station not found</p>
+                            <div className="warn-parent">
+                                <p className="warn-right">station not found</p>
                             </div>
                         : <></>
                     }

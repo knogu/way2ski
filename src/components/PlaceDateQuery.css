@@ -28,6 +28,10 @@
   width: 60%;
 }
 
+.warn-parent {
+  height: 15px;
+}
+
 .place-query #hometown-station, select, .warn-right {
   float: right;
   width: 60%;
@@ -35,6 +39,7 @@
 }
 
 .warn-right {
+  padding-left: 7px;
   color: red;
   font-size: 13px;
 }
